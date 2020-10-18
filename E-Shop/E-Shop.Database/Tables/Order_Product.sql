@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Order_Product]
-(
-	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[OrderId] BIGINT FOREIGN KEY ([OrderId]) REFERENCES [Order]([Id]) NOT NULL,
-	[ProductId] BIGINT NOT NULL
-)

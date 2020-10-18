@@ -1,7 +1,10 @@
 ﻿CREATE TABLE [dbo].[Order]
 (
 	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[LeadId] BIGINT NOT NULL,
+	[LeadId] BIGINT  FOREIGN KEY ([LeadId]) REFERENCES [Lead]([Id]) NOT NULL,
 	[StoreId] INT NOT NULL,
-	[TimeOrder] DATETIME2 NOT NULL
-)
+	[Amount] DECIMAL NOT NULL,
+	[PaymentType] INT NOT NULL,
+	[Date] DATETIME2 NOT NULL,
+	[StatusId] INT FOREIGN KEY ([StatusId]) REFERENCES [Status]([Id]) NOT NULL
+	)
