@@ -62,9 +62,13 @@
   <ItemGroup>
     <Build Include="Tables\Store.sql" />
     <Build Include="Tables\Order.sql" />
-    <Build Include="Tables\Order_Product.sql" />
+    <Build Include="Tables\Product_Order.sql" />
     <Build Include="Tables\Lead.sql" />
-    <Build Include="Tables\City.sql" />
     <Build Include="Tables\Product_Store.sql" />
+    <Build Include="Tables\Role.sql" />
+    <Build Include="Tables\Lead_Role.sql" />
+    <Build Include="Tables\Status.sql" />
+    <Build Include="Tables\Product.sql" />
+    <Build Include="Tables\PaymentType.sql" />
   </ItemGroup>
 </Project>
