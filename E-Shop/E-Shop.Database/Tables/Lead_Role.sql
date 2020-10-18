@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Lead_Role]
-(
-	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[LeadId] BIGINT FOREIGN KEY ([LeadId]) REFERENCES [Lead]([Id]) NOT NULL,
-	[RoleId] INT FOREIGN KEY ([RoleId]) REFERENCES [Role]([Id]) NOT NULL
-)

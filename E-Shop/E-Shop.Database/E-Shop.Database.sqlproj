@@ -58,6 +58,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="StoredProcedures" />
+    <Folder Include="StoredProcedures\LeadCrud" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Store.sql" />
@@ -66,9 +67,10 @@
     <Build Include="Tables\Lead.sql" />
     <Build Include="Tables\Product_Store.sql" />
     <Build Include="Tables\Role.sql" />
-    <Build Include="Tables\Lead_Role.sql" />
     <Build Include="Tables\Status.sql" />
     <Build Include="Tables\Product.sql" />
     <Build Include="Tables\PaymentType.sql" />
+    <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
+    <Build Include="Tables\City.sql" />
   </ItemGroup>
 </Project>
