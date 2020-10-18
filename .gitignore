@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 E-Shop/E-Shop.Database/E-Shop.Database.sqlproj
+
+*.sqlproj
