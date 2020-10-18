@@ -72,5 +72,6 @@
     <Build Include="Tables\PaymentType.sql" />
     <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
     <Build Include="Tables\City.sql" />
+    <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
   </ItemGroup>
 </Project>
