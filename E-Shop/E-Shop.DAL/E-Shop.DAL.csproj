@@ -5,8 +5,4 @@
     <RootNamespace>E_Shop.DAL</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-
 </Project>
