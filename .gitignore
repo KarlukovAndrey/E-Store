@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+E-Shop/E-Shop.Database/E-Shop.Database.sqlproj
