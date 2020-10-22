@@ -59,6 +59,9 @@
     <Folder Include="Tables" />
     <Folder Include="StoredProcedures" />
     <Folder Include="StoredProcedures\LeadCrud" />
+    <Folder Include="StoredProcedures\Product_OrderCrud" />
+    <Folder Include="StoredProcedures\Product_StoreCrud" />
+    <Folder Include="StoredProcedures\OrderCrud" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Store.sql" />
@@ -75,5 +78,13 @@
     <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
     <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
     <Build Include="StoredProcedures\LeadCrud\UpdateLead.sql" />
+    <Build Include="StoredProcedures\Product_OrderCrud\CreateProduct_Order.sql" />
+    <Build Include="StoredProcedures\Product_OrderCrud\UpdateProduct_Order.sql" />
+    <Build Include="StoredProcedures\Product_OrderCrud\DeleteProduct_Order.sql" />
+    <Build Include="StoredProcedures\Product_StoreCrud\CreateProduct_Store.sql" />
+    <Build Include="StoredProcedures\Product_StoreCrud\DeleteProduct_Store.sql" />
+    <Build Include="StoredProcedures\Product_StoreCrud\UpdateProduct_Store.sql" />
+    <Build Include="StoredProcedures\OrderCrud\CreateOrder.sql" />
+    <Build Include="StoredProcedures\OrderCrud\UpdateOrder.sql" />
   </ItemGroup>
 </Project>
