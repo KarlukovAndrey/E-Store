@@ -70,10 +70,10 @@
     <Build Include="Tables\Status.sql" />
     <Build Include="Tables\Product.sql" />
     <Build Include="Tables\PaymentType.sql" />
-    <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
     <Build Include="Tables\City.sql" />
-    <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
-    <Build Include="StoredProcedures\LeadCrud\UpdateLead.sql" />
     <Build Include="Tables\DeliveryType.sql" />
+    <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
+    <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
+    <Build Include="StoredProcedures\LeadCrud\UpdateLead.sql" />
   </ItemGroup>
 </Project>

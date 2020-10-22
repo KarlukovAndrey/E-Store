@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UpdateLead]
+﻿Create PROCEDURE [dbo].[UpdateLead]
   @Id BIGINT,
   @FirstName NVARCHAR(50),
   @LastName NVARCHAR(50),
@@ -7,6 +7,7 @@
   @CityId INT,
   @Phone NVARCHAR(20),
   @Email NVARCHAR(30),
+  @Password NVARCHAR(60),
   @RoleId INT
 as
   Begin
@@ -18,8 +19,8 @@ as
 	CityId = @CityId,
 	Phone = @Phone,
 	Email = @Email,
+	Password = @Password,
 	RoleId = @RoleId
 
 	where (Id = @Id)
   END
-
