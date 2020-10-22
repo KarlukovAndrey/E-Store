@@ -6,5 +6,6 @@
 	[Amount] DECIMAL NOT NULL,
 	[PaymentType] INT NOT NULL,
 	[Date] DATETIME2 NOT NULL,
+	[DeliveryTypeId] INT FOREIGN KEY([DeliveryTypeId]) REFERENCES [DeliveryType]([Id]) NOT NULL,
 	[StatusId] INT FOREIGN KEY ([StatusId]) REFERENCES [Status]([Id]) NOT NULL
 	)
