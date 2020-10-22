@@ -10,7 +10,7 @@
   @Password NVARCHAR(60),
   @RoleId INT
 as
-  Begin
+  begin
 	Update [dbo].[Lead] set
 	FirstName = @FirstName,
 	LastName = @LastName,
@@ -23,4 +23,4 @@ as
 	RoleId = @RoleId
 
 	where (Id = @Id)
-  END
+  end
