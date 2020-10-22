@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace E_Shop.DAL.DTO
+namespace E_Shop.Data.DTO
 {
-    public class StoreDTO
+    public class StatusDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace E_Shop.DAL.DTO
+namespace E_Shop.Data.DTO
 {
-    public class PaymentTypeDTO
+    public class CityDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
