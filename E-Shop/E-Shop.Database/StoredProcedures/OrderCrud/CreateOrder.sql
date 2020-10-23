@@ -8,7 +8,7 @@
 	@Discount int
 As
 Begin
-	insert into [dbo].[Order](LeadId, StoreId, Amount,PaymentTypeId, Date, DeliveryTypeId,StatusId, Discount)
+	insert into [dbo].[Order](LeadId, StoreId, Amount,PaymentTypeId, OrderDate, DeliveryTypeId,StatusId, Discount)
 	values (@LeadId, @StoreId, @Amount,@PaymentTypeId, SYSDATETIME(), @DeliveryTypeId, @StatusId, @Discount)
 	select SCOPE_IDENTITY()
 END

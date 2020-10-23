@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace E_Shop.Data.DTO
+namespace E_Shop.Business.Models.Input
 {
-    public class OrderDTO
+    public class OrderInputModel
     {
-        public int Id { get; set; }
+        public long? Id { get; set; }
         public long LeadId { get; set; }
-        public int StoreId { get; set; }
+        public int StoredId { get; set; }
         public decimal Amount { get; set; }
         public int PaymentTypeId { get; set; }
-        public string OrderDate { get; set; }
         public int DeliveryTypeId { get; set; }
         public int StatusId { get; set; }
-        public int Discount { get; set; }
 
     }
 }

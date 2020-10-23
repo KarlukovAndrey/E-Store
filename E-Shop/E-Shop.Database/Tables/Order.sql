@@ -5,7 +5,7 @@
 	[StoreId] INT NOT NULL,
 	[Amount] DECIMAL NOT NULL,
 	[PaymentTypeId] INT FOREIGN KEY([PaymentTypeId]) References[PaymentType]([Id]) NOT NULL,
-	[Date] DATETIME2 NOT NULL,
+	[OrderDate] DATETIME2 NOT NULL,
 	[DeliveryTypeId] INT FOREIGN KEY([DeliveryTypeId]) REFERENCES [DeliveryType]([Id]) NOT NULL,
 	[StatusId] INT FOREIGN KEY ([StatusId]) REFERENCES [Status]([Id]) NOT NULL,
 	[Discount] INT NOT NULL
