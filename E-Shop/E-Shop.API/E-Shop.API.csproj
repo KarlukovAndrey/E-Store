@@ -9,10 +9,17 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>C:\work\С#\BackEnd\MyProjects\E-Store\E-Shop\E-Shop.API\E-Shop.API.xml</DocumentationFile>
+	</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\E-Shop.Business\E-Shop.Business.csproj" />
   </ItemGroup>
 
 
