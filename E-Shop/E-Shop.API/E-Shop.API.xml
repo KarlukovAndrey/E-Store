@@ -4,5 +4,128 @@
         <name>E-Shop.API</name>
     </assembly>
     <members>
+        <member name="M:E_Shop.API.Controllers.LeadController.GetLead(System.Int64)">
+            <summary>
+            Get Lead by id
+            </summary>  
+            <param name="id"></param>
+            <returns> Lead Output Model</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.LeadController.AddLead(E_Shop.Business.Models.Input.LeadInputModel)">
+             <summary>
+             Create lead
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /
+                 {
+                    "FirstName": "Vasia",
+                    "LastName": "Ivanov",
+                    "Birthday": "12.31.1991",
+                    "Address": "Lenina 14",
+                    "CityId": 1,
+                    "Phone":"89214587400",
+                    "Email": "something@mail.ru",
+                    "Password":"qq!fs23"    
+                 }
+            
+             </remarks>
+             <returns> LeadOutputModel</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.LeadController.UpdateLead(E_Shop.Business.Models.Input.LeadInputModel)">
+             <summary>
+             Update lead
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /
+                 {
+                    "Id": 1,
+                    "FirstName": "Vasia",
+                    "LastName": "Ivanov",
+                    "Birthday": "12.31.1991",
+                    "Address": "Lenina 14",
+                    "CityId": 1,
+                    "Phone":"89214587400",
+                    "Email": "something@mail.ru",
+                    "Password":"qq!fs23"    
+                 }
+            
+             </remarks>
+             <returns> LeadOutputModel</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.LeadController.DeleteLead(System.Int64)">
+            <summary>
+            Delete lead
+            </summary>
+            <param name="id"></param>
+            <returns>LeadOutputModel</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.LeadController.GetResultSearch">
+            <summary>
+            Universal lead search
+            </summary>
+            <returns>List LeadOutputModels</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.OrderController.GetOrder(System.Int64)">
+            <summary>
+            Get Order by id
+            </summary>  
+            <param name="id"></param>
+            <returns> Order Output Model</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.OrderController.AddOrder(E_Shop.Business.Models.Input.OrderInputModel)">
+             <summary>
+             Creates order
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /
+                 {
+                    "LeadId": 1,
+                    "StoredId": 1,
+                    "PaymentTypeId": 1,
+                    "DeliveryTypeId": 1,
+                    "StatusId": 2
+                 }
+            
+             </remarks>      
+             <returns> Order Output Model</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.OrderController.UpdateOrder(E_Shop.Business.Models.Input.OrderInputModel)">
+             <summary>
+             Updates order
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /
+                 {  
+                    "Id": 1,       
+                    "StoredId": 1,
+                    "PaymentTypeId": 1,
+                    "DeliveryTypeId": 1,
+                    "StatusId": 2
+                 }
+            
+             </remarks>      
+             <returns> Order Output Model</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.OrderController.GetResultSearch">
+            <summary>
+            Universal order search
+            </summary>
+            <returns> List OrderOutputModels</returns>
+        </member>
+        <member name="M:E_Shop.API.Controllers.ProductController.GetProduct(System.Int32)">
+            <summary>
+            Get Product by id
+            </summary>  
+            <param name="id"></param>
+            <returns> Product model</returns>
+        </member>
     </members>
 </doc>

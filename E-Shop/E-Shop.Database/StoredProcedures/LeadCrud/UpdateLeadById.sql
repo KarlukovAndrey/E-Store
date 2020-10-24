@@ -1,4 +1,4 @@
-﻿Create PROCEDURE [dbo].[UpdateLead]
+﻿Create PROCEDURE [dbo].[UpdateLeadById]
   @Id BIGINT,
   @FirstName NVARCHAR(50),
   @LastName NVARCHAR(50),

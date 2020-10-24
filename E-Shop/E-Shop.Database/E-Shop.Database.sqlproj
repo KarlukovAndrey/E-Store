@@ -77,7 +77,7 @@
     <Build Include="Tables\DeliveryType.sql" />
     <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
     <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
-    <Build Include="StoredProcedures\LeadCrud\UpdateLead.sql" />
+    <Build Include="StoredProcedures\LeadCrud\UpdateLeadById.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\CreateProduct_Order.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\UpdateProduct_Order.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\DeleteProduct_Order.sql" />
