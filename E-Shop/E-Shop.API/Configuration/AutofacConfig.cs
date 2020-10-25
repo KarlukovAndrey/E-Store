@@ -1,0 +1,14 @@
+﻿using Autofac;
+using E_Shop.Data.Repositories;
+
+
+namespace E_Shop.API.Configuration
+{
+    public class AutofacConfig : Module
+    { 
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<LeadRepository>().As<ILeadRepository>().SingleInstance();
+        }
+    }
+}

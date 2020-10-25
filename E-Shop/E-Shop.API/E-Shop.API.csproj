@@ -14,6 +14,9 @@
 	  <DocumentationFile>C:\work\С#\BackEnd\MyProjects\E-Store\E-Shop\E-Shop.API\E-Shop.API.xml</DocumentationFile>
 	</PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.0.2" />
+    <PackageReference Include="Autofac.Mvc5" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
