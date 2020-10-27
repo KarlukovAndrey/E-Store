@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using E_Shop.Business.Managers;
 using E_Shop.Data.Repositories;
 
 
@@ -9,6 +10,7 @@ namespace E_Shop.API.Configuration
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LeadRepository>().As<ILeadRepository>().SingleInstance();
+            builder.RegisterType<LeadManager>().As<ILeadManager>().SingleInstance();
         }
     }
 }

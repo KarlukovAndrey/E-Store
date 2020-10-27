@@ -6,14 +6,20 @@ using E_Shop.Business.Models.Output;
 using E_Shop.Business.Models.Input;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using E_Shop.Business.Managers;
 
 namespace E_Shop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LeadController : Controller
+    public class LeadController : ControllerBase
     {
-        public LeadController() { }
+        private ILeadManager _leadManager;
+        public LeadController
+            (ILeadManager leadManager) 
+        {
+            _leadManager = leadManager;
+        }
 
         /// <summary>
         /// Get Lead by id
@@ -23,6 +29,7 @@ namespace E_Shop.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<LeadOutputModel> GetLead(long id)
         {
+            //var result = _leadManager.FindLeads(id)
             return null;
         }
 
@@ -36,7 +43,7 @@ namespace E_Shop.API.Controllers
         ///     {
         ///        "FirstName": "Vasia",
         ///        "LastName": "Ivanov",
-        ///        "Birthday": "12.31.1991",
+        ///        "Birthday": "31.12.1991",
         ///        "Address": "Lenina 14",
         ///        "CityId": 1,
         ///        "Phone":"89214587400",
@@ -47,10 +54,19 @@ namespace E_Shop.API.Controllers
         /// </remarks>
         /// <returns> LeadOutputModel</returns>
         //[AllowAnonymous]
-        [HttpPost]
+        [HttpPost("add")]
         public ActionResult<LeadOutputModel> AddLead([FromBody] LeadInputModel model)
         {
-            return null;
+            var result = _leadManager.CreateLead(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
         /// <summary>
@@ -85,10 +101,12 @@ namespace E_Shop.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>LeadOutputModel</returns>
-        [HttpDelete]
+        //[Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
         public ActionResult DeleteLead(long id)
         {
-            return null;
+           var result = _leadManager.DeleteLead(id);
+            return Ok(result.Data);
         }
 
         /// <summary>
