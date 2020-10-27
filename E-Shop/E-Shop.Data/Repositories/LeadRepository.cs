@@ -58,9 +58,9 @@ namespace E_Shop.Data.Repositories
             var data = new DataWrapper<LeadDTO>();
             try
             {
-                data.Data = DbConnection.Query<LeadDTO, CityDTO, RoleDTO, LeadDTO>(
+                data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
                     StoredProcedure.DeleteLeadProcedure,
-                    (lead, city, role) =>
+                    (lead, role, city) =>
                     {
                         lead.Role = role;
                         lead.City = city;
