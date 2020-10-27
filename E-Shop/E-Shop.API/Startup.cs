@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using AutoMapper;
 
 namespace E_Shop.API
 {
@@ -30,6 +31,7 @@ namespace E_Shop.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.Configure<DBSettings>(Configuration);
             services.AddSwaggerGen(c =>

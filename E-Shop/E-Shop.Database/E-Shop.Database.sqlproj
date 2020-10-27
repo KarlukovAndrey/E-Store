@@ -76,7 +76,7 @@
     <Build Include="Tables\City.sql" />
     <Build Include="Tables\DeliveryType.sql" />
     <Build Include="StoredProcedures\LeadCrud\CreateLead.sql" />
-    <Build Include="StoredProcedures\LeadCrud\DeleatedLeadById.sql" />
+    <Build Include="StoredProcedures\LeadCrud\DeletedLeadById.sql" />
     <Build Include="StoredProcedures\LeadCrud\UpdateLeadById.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\CreateProduct_Order.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\UpdateProduct_Order.sql" />
@@ -86,5 +86,6 @@
     <Build Include="StoredProcedures\Product_StoreCrud\UpdateProduct_Store.sql" />
     <Build Include="StoredProcedures\OrderCrud\CreateOrder.sql" />
     <Build Include="StoredProcedures\OrderCrud\UpdateOrder.sql" />
+    <Build Include="StoredProcedures\LeadCrud\Lead_SelectById.sql" />
   </ItemGroup>
 </Project>
