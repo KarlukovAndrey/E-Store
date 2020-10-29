@@ -7,6 +7,7 @@ using E_Shop.Business.Models.Input;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using E_Shop.Business.Managers;
+using E_Shop.Data;
 
 namespace E_Shop.API.Controllers
 {
@@ -90,20 +91,18 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>
         /// <returns> LeadOutputModel</returns>
-        [HttpPut]
-        public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
-        {
-            var result = _leadManager.UpdateLead(model);
-            if (result.IsOk)
-            {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
-            }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
-        }
+        //[HttpPut]
+        //public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
+        //{
+        //    //add lead validation
+        //    //if (!string.IsNullOrEmpty(validationResult))
+        //    //{
+        //    //    return UnprocessableEntity(validationResult);
+        //    //}
+
+        //    //var result = _leadManager.UpdateLead(model);
+        //    //return MakeResponse<List<LeadOutputModel>, LeadOutputModel>(result);
+        //}
 
         /// <summary>
         /// Delete lead
@@ -123,9 +122,23 @@ namespace E_Shop.API.Controllers
         /// </summary>
         /// <returns>List LeadOutputModels</returns>
         [HttpPost("search")]
-        public ActionResult<List<LeadOutputModel>> GetResultSearch() 
+        public ActionResult<List<LeadOutputModel>> GetResultSearch([FromBody] SearchInputModel model) 
         {
-            return null;
+            var results = _leadManager.FindLeads(model);
+            return MakeResponse<List<LeadOutputModel>, List<LeadOutputModel>>(results);
+        }
+
+        private ActionResult<K> MakeResponse<T, K>(DataWrapper<T> operationResult)
+        {
+            if (operationResult.IsOk)
+            {
+                if (operationResult.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(operationResult.Data);
+            }
+            return Problem(detail: operationResult.ErrorMessage, statusCode: 520);
         }
     }
 }

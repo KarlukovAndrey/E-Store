@@ -33,29 +33,6 @@
              </remarks>
              <returns> LeadOutputModel</returns>
         </member>
-        <member name="M:E_Shop.API.Controllers.LeadController.UpdateLead(E_Shop.Business.Models.Input.LeadInputModel)">
-             <summary>
-             Update lead
-             </summary>
-             <remarks>
-             Sample request:
-            
-                 POST /
-                 {
-                    "Id": 1,
-                    "FirstName": "Vasia",
-                    "LastName": "Ivanov",
-                    "Birthday": "12.31.1991",
-                    "Address": "Lenina 14",
-                    "CityId": 1,
-                    "Phone":"89214587400",
-                    "Email": "something@mail.ru",
-                    "Password":"qq!fs23"    
-                 }
-            
-             </remarks>
-             <returns> LeadOutputModel</returns>
-        </member>
         <member name="M:E_Shop.API.Controllers.LeadController.DeleteLead(System.Int64)">
             <summary>
             Delete lead
@@ -63,7 +40,7 @@
             <param name="id"></param>
             <returns>LeadOutputModel</returns>
         </member>
-        <member name="M:E_Shop.API.Controllers.LeadController.GetResultSearch">
+        <member name="M:E_Shop.API.Controllers.LeadController.GetResultSearch(E_Shop.Business.Models.Input.SearchInputModel)">
             <summary>
             Universal lead search
             </summary>
