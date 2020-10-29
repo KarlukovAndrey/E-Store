@@ -8,6 +8,7 @@ namespace E_Shop.Data.Repositories
     public interface ILeadRepository
     {
         DataWrapper<LeadDTO> CreateLead(LeadDTO dto);
+        DataWrapper<LeadDTO> UpdateLead(LeadDTO leadDto);
         DataWrapper<LeadDTO> DeleteLeadById(long Id);
     }
 }

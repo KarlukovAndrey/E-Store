@@ -32,7 +32,7 @@ namespace E_Shop.Data.Repositories
                         return lead;
                     },
                     new
-                    {                   
+                    {
                         CityId = dto.City.Id,
                         dto.FirstName,
                         dto.LastName,
@@ -46,27 +46,38 @@ namespace E_Shop.Data.Repositories
                     commandType: CommandType.StoredProcedure
                     ).SingleOrDefault();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.ErrorMessage = ex.Message;
             }
             return result;
         }
-        
-        public DataWrapper<LeadDTO> DeleteLeadById(long Id)
+        public DataWrapper<LeadDTO> UpdateLead(LeadDTO leadDto)
         {
             var data = new DataWrapper<LeadDTO>();
             try
             {
-                data.Data = DbConnection.Query<LeadDTO, CityDTO, RoleDTO, LeadDTO>(
-                    StoredProcedure.DeleteLeadProcedure,
-                    (lead, city, role) =>
+                data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
+                    StoredProcedure.UpdateLeadByIdProcedure,
+                    (lead, role, city) =>
                     {
                         lead.Role = role;
                         lead.City = city;
                         return lead;
                     },
-                    new { Id },
+                    new
+                    {
+                        leadDto.Id,
+                        CityId = leadDto.City.Id,
+                        leadDto.FirstName,
+                        leadDto.LastName,
+                        leadDto.RegistrationDate,
+                        leadDto.Birthday,
+                        leadDto.Address,
+                        leadDto.Phone,
+                        leadDto.Email,
+                        RoleId = leadDto.Role.Id
+                    },
                     splitOn: "Id",
                     commandType: CommandType.StoredProcedure).
                     SingleOrDefault();
@@ -75,7 +86,32 @@ namespace E_Shop.Data.Repositories
             {
                 data.ErrorMessage = ex.Message;
             }
-            return data; 
+            return data;
+        }
+
+        public DataWrapper<LeadDTO> DeleteLeadById(long id)
+        {
+            var data = new DataWrapper<LeadDTO>();
+            try
+            {
+                data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
+                    StoredProcedure.DeleteLeadProcedure,
+                    (lead, role, city) =>
+                    {
+                        lead.Role = role;
+                        lead.City = city;
+                        return lead;
+                    },
+                    new { id },
+                    splitOn: "Id",
+                    commandType: CommandType.StoredProcedure).
+                    SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                data.ErrorMessage = ex.Message;
+            }
+            return data;
         }
     }
 }

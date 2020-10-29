@@ -4,7 +4,7 @@
 	[FirstName] nvarchar(50) NOT NULL,
 	[LastName] nvarchar(50) NOT NULL,
 	[RegistrationDate] datetime2 NOT NULL,
-	[Birthday] datetime2 NOT NULL,
+	[Birthday] date NOT NULL,
 	[Address] nvarchar(40)NOT NULL,
 	[Phone] nvarchar(20) NOT NULL,
 	[Email] nvarchar(30) UNIQUE NOT NULL,

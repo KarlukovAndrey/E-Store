@@ -31,6 +31,18 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
+
+        public DataWrapper<LeadOutputModel> UpdateLead(LeadInputModel model)
+        {
+            var leadDTO = _mapper.Map<LeadDTO>(model);
+            var data = _leadRepository.UpdateLead(leadDTO);
+            var mapperData = _mapper.Map<LeadOutputModel>(data.Data);
+            return new DataWrapper<LeadOutputModel>
+            {
+                Data = mapperData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
         public DataWrapper<LeadOutputModel> DeleteLead(long id)
         {
             var data = _leadRepository.DeleteLeadById(id);

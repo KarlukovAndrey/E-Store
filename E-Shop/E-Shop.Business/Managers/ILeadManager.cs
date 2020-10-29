@@ -9,7 +9,7 @@ namespace E_Shop.Business.Managers
     public interface ILeadManager
     {
         DataWrapper<LeadOutputModel> CreateLead(LeadInputModel model);
+        DataWrapper<LeadOutputModel> UpdateLead(LeadInputModel model);
         DataWrapper<LeadOutputModel> DeleteLead(long id);
-        //DataWrapper<LeadOutputModel>
     }
 }

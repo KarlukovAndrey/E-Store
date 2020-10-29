@@ -45,10 +45,10 @@ namespace E_Shop.API.Controllers
         ///        "LastName": "Ivanov",
         ///        "Birthday": "31.12.1991",
         ///        "Address": "Lenina 14",
-        ///        "CityId": 1,
         ///        "Phone":"89214587400",
         ///        "Email": "something@mail.ru",
-        ///        "Password":"qq!fs23"    
+        ///        "Password":"qq!fs23",   
+        ///        "CityId":1
         ///     }
         ///
         /// </remarks>
@@ -93,7 +93,16 @@ namespace E_Shop.API.Controllers
         [HttpPut]
         public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
         {
-            return null;
+            var result = _leadManager.UpdateLead(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
         /// <summary>
