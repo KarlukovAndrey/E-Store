@@ -54,6 +54,22 @@ namespace E_Shop.Business.Managers
             };
         }
 
-        
+        public DataWrapper<List<LeadOutputModel>> FindLeads(SearchInputModel model)
+        {
+            var searchDto = _mapper.Map<SearchDTO>(model);
+            var data = _leadRepository.SearchLead(searchDto);
+            var mappedData = _mapper.Map<List<LeadOutputModel>>(data.Data);
+
+            return new DataWrapper<List<LeadOutputModel>>
+            {
+                Data = mappedData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
+
+        public DataWrapper<List<LeadOutputModel>> FindLeads(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,7 +21,14 @@ namespace E_Shop.API.Configuration
             CreateMap<LeadDTO, LeadOutputModel>()
                 .ForPath(dest => dest.Birthday, o => o.MapFrom(src => src.Birthday.ToString(_shortDateFormat)))
                 .ForPath(dest => dest.RegistrationDate, o => o.MapFrom(src => src.RegistrationDate.ToString(_longDateFormat)));
-
+           
+            CreateMap<SearchInputModel, SearchDTO>()
+                .ForPath(dest => dest.BirthdayFrom, o => o.MapFrom(src => src.BirthdayFrom != null ? (DateTime?)DateTime.ParseExact(src.BirthdayFrom, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.BirthdayTo, o => o.MapFrom(src => src.BirthdayTo != null ? (DateTime?)DateTime.ParseExact(src.BirthdayTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.RegistrationDateFrom, o => o.MapFrom(src => src.RegistrationDateFrom != null ? (DateTime?)DateTime.ParseExact(src.RegistrationDateFrom, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.RegistrationDateTo, o => o.MapFrom(src => src.RegistrationDateTo != null ? (DateTime?)DateTime.ParseExact(src.RegistrationDateTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.Role, o => o.MapFrom(src => src.RoleId != null ? new RoleDTO() { Id = (int)src.RoleId } : null))
+                .ForPath(dest => dest.City, o => o.MapFrom(src => src.CityId != null ? new CityDTO() { Id = (int)src.CityId } : null));
 
         }
     }

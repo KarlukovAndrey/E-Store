@@ -3,10 +3,10 @@ using E_Shop.Core.Settings;
 using E_Shop.Data.DTO;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Xml;
 
 namespace E_Shop.Data.Repositories
 {
@@ -112,6 +112,49 @@ namespace E_Shop.Data.Repositories
                 data.ErrorMessage = ex.Message;
             }
             return data;
+        }
+
+        public DataWrapper<List<LeadDTO>> SearchLead(SearchDTO searchDto)
+        {
+            var data = new DataWrapper<List<LeadDTO>>();
+            try
+            {
+                data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
+                StoredProcedure.SearchLead,
+                (lead, role, city) =>
+                {
+                    lead.Role = role;
+                    lead.City = city;
+                    return lead;
+                }, new
+                {
+                    searchDto.Id,
+                    RoleId = searchDto.Role?.Id,
+                    CityId = searchDto.City?.Id,
+                    searchDto.FirstName,
+                    searchDto.FirstNameSearchMode,
+                    searchDto.LastName,
+                    searchDto.LastNameSearchMode,
+                    searchDto.BirthdayFrom,
+                    searchDto.BirthdayTo,
+                    searchDto.RegistrationDateFrom,
+                    searchDto.RegistrationDateTo,
+                    searchDto.Phone,
+                    searchDto.PhoneSearchMode,
+                    searchDto.Email,
+                    searchDto.EmailSearchMode,
+                    searchDto.IsDeleted
+                },
+                splitOn: "Id",
+                commandType: CommandType.StoredProcedure
+                ).ToList();
+            }
+            catch(Exception ex)
+            {
+                data.ErrorMessage = ex.Message;
+            }
+            return data;
+
         }
     }
 }
