@@ -30,7 +30,7 @@ declare @resultSQL nvarchar(max) ='
 			L.[Phone],
 			L.[IsDeleted],
 			C.Id,C.[Name],
-			R.Id, R.[Name],
+			R.Id, R.[Name]
 	FROM    [dbo].[Lead] as L
 	inner JOIN dbo.[City] as C on L.[CityId] = C.Id
 	INNER JOIN dbo.[Role] as R on L.[RoleId] = R.Id
@@ -49,10 +49,10 @@ declare @resultSQL nvarchar(max) ='
       end
 	 if( @FirstName IS NOT NULL)
       begin  
-          if @FirstNameSearchMode = 0 set @resultSQL += ' and L.[Name] LIKE ''' + CONVERT(nvarchar(50), @FirstName) + '%'''
-		  if @FirstNameSearchMode is null or @FirstNameSearchMode = 1 set @resultSQL += ' and L.[Name] LIKE ' + '''%' + CONVERT(nvarchar(50), @FirstName) + '%'''
-          if @FirstNameSearchMode = 2 set @resultSQL += ' and L.[Name] LIKE ' + '''%' + CONVERT(nvarchar(50), @FirstName) + ''''
-          if @FirstNameSearchMode = 3 set @resultSQL += ' and L.[Name] = ' + '''' + CONVERT(nvarchar(50), @FirstName)+''''
+          if @FirstNameSearchMode = 0 set @resultSQL += ' and L.[FirstName] LIKE ''' + CONVERT(nvarchar(50), @FirstName) + '%'''
+		  if @FirstNameSearchMode is null or @FirstNameSearchMode = 1 set @resultSQL += ' and L.[FirstName] LIKE ' + '''%' + CONVERT(nvarchar(50), @FirstName) + '%'''
+          if @FirstNameSearchMode = 2 set @resultSQL += ' and L.[FirstName] LIKE ' + '''%' + CONVERT(nvarchar(50), @FirstName) + ''''
+          if @FirstNameSearchMode = 3 set @resultSQL += ' and L.[FirstName] = ' + '''' + CONVERT(nvarchar(50), @FirstName)+''''
       end
 	 if( @LastName IS NOT NULL)
 	  begin    
