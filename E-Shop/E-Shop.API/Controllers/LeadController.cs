@@ -93,7 +93,16 @@ namespace E_Shop.API.Controllers
         [HttpPut]
         public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
         {
-            return null;
+            var result = _leadManager.UpdateLead(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
         /// <summary>
