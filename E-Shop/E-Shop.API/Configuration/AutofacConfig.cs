@@ -10,6 +10,8 @@ namespace E_Shop.API.Configuration
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LeadRepository>().As<ILeadRepository>().SingleInstance();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().SingleInstance();
+            builder.RegisterType<OrderManager>().As<IOrderManager>().SingleInstance();
             builder.RegisterType<LeadManager>().As<ILeadManager>().SingleInstance();
         }
     }

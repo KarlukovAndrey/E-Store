@@ -1,15 +1,16 @@
 ﻿CREATE PROCEDURE [dbo].[CreateOrder]
 	@LeadId bigint,
-	@StoreId int,
 	@Amount int,
+	@Discount int,
+	@StoreId int,
 	@PaymentTypeId int,
 	@DeliveryTypeId int,
-	@StatusId int,
-	@Discount int
+	@StatusId int
 As
 Begin
-	insert into [dbo].[Order](LeadId, StoreId, Amount,PaymentTypeId, OrderDate, DeliveryTypeId,StatusId, Discount)
-	values (@LeadId, @StoreId, @Amount,@PaymentTypeId, SYSDATETIME(), @DeliveryTypeId, @StatusId, @Discount)
-	select SCOPE_IDENTITY()
+	insert into [dbo].[Order](LeadId, Amount, OrderDate, Discount, StoreId, PaymentTypeId, DeliveryTypeId,StatusId)
+	values (@LeadId, @Amount, SYSDATETIME(), @Discount, @StoreId, @PaymentTypeId, @DeliveryTypeId, @StatusId)
+	declare @OrderId bigint
+set @OrderId = SCOPE_IDENTITY()
+exec [dbo].[Order_SelectById] @OrderId
 END
-	

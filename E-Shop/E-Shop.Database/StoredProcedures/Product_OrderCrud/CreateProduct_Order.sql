@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[CreateProduct_Order]
-  @ProductId bigint,
-  @OrderId int,
+  @OrderId bigint,
+  @ProductId int,
   @Quantity int
 As
-  Insert into dbo.[Product_Order]
-  Values (@ProductId, @OrderId, @Quantity)
+  Insert into dbo.[Product_Order] (OrderId, ProductId, Quantity)
+  Values ( @OrderId, @ProductId, @Quantity)

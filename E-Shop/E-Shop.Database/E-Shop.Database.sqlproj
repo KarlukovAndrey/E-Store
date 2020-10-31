@@ -88,5 +88,7 @@
     <Build Include="StoredProcedures\OrderCrud\UpdateOrder.sql" />
     <Build Include="StoredProcedures\LeadCrud\Lead_SelectById.sql" />
     <Build Include="StoredProcedures\LeadCrud\SearchLead.sql" />
+    <Build Include="StoredProcedures\LeadCrud\UpdateLeadAddress.sql" />
+    <Build Include="StoredProcedures\OrderCrud\Order_SelectById.sql" />
   </ItemGroup>
 </Project>

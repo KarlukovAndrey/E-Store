@@ -4,11 +4,9 @@ using System.Text;
 
 namespace E_Shop.Data.DTO
 {
-    public class StoreDTO
+    public class UpdateLeadAddressDTO
     {
-        public int? Id { get; set; }
-        public string Name { get; set; }
+        public long Id { get; set; }
         public string Address { get; set; }
     }
 }
-

@@ -29,7 +29,17 @@ namespace E_Shop.API.Configuration
                 .ForPath(dest => dest.RegistrationDateTo, o => o.MapFrom(src => src.RegistrationDateTo != null ? (DateTime?)DateTime.ParseExact(src.RegistrationDateTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
                 .ForPath(dest => dest.Role, o => o.MapFrom(src => src.RoleId != null ? new RoleDTO() { Id = (int)src.RoleId } : null))
                 .ForPath(dest => dest.City, o => o.MapFrom(src => src.CityId != null ? new CityDTO() { Id = (int)src.CityId } : null));
+            
+            CreateMap<UpdateLeadAddressInputModel, UpdateLeadAddressDTO>();
 
+            CreateMap<OrderInputModel, OrderDTO>()
+                .ForPath(dest => dest.Store, o => o.MapFrom(src => new StoreDTO() { Id = src.StoredId}))
+                .ForPath(dest => dest.DeliveryType, o => o.MapFrom(src => new DeliveryTypeDTO() { Id = src.DeliveryTypeId}))
+                .ForPath(dest => dest.PaymentType, o => o.MapFrom(src => new PaymentTypeDTO() { Id = src.PaymentTypeId}))
+                .ForPath(dest => dest.Status, o => o.MapFrom(src => new StatusDTO() { Id = src.StatusId}));
+
+            CreateMap<OrderDTO, OrderOutputModel>()
+                .ForPath(dest => dest.OrderDate, o => o.MapFrom(src => src.OrderDate.ToString(_longDateFormat)));
         }
     }
 }

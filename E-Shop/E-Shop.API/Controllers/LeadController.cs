@@ -16,8 +16,7 @@ namespace E_Shop.API.Controllers
     public class LeadController : ControllerBase
     {
         private ILeadManager _leadManager;
-        public LeadController
-            (ILeadManager leadManager) 
+        public LeadController(ILeadManager leadManager) 
         {
             _leadManager = leadManager;
         }
@@ -70,27 +69,7 @@ namespace E_Shop.API.Controllers
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
-        /// <summary>
-        /// Update lead
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /
-        ///     {
-        ///        "Id": 1,
-        ///        "FirstName": "Vasia",
-        ///        "LastName": "Ivanov",
-        ///        "Birthday": "12.31.1991",
-        ///        "Address": "Lenina 14",
-        ///        "CityId": 1,
-        ///        "Phone":"89214587400",
-        ///        "Email": "something@mail.ru",
-        ///        "Password":"qq!fs23"    
-        ///     }
-        ///
-        /// </remarks>
-        /// <returns> LeadOutputModel</returns>
+    
         //[HttpPut]
         //public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
         //{
@@ -103,6 +82,21 @@ namespace E_Shop.API.Controllers
         //    //var result = _leadManager.UpdateLead(model);
         //    //return MakeResponse<List<LeadOutputModel>, LeadOutputModel>(result);
         //}
+
+        [HttpPut("{update-address}")]
+        public ActionResult<LeadOutputModel> UpdateLeadAddress([FromBody] UpdateLeadAddressInputModel model)
+        {
+            var result = _leadManager.UpdateLeadAddress(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+        }
 
         /// <summary>
         /// Delete lead

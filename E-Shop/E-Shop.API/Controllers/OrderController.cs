@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Shop.Business.Managers;
 using E_Shop.Business.Models.Input;
 using E_Shop.Business.Models.Output;
 using Microsoft.AspNetCore.Http;
@@ -11,8 +12,13 @@ namespace E_Shop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : Controller
+    public class OrderController : ControllerBase
     {
+        private IOrderManager _orderManager;
+        public OrderController(IOrderManager orderManager)
+        {
+            _orderManager = orderManager;
+        }
         /// <summary>
         /// Get Order by id
         /// </summary>  
@@ -41,10 +47,19 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>      
         /// <returns> Order Output Model</returns>
-        [HttpPost]
+        [HttpPost("add")]
         public ActionResult<OrderOutputModel> AddOrder([FromBody] OrderInputModel model)
         {
-            return null;
+            var result = _orderManager.CreateOrder(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
         /// <summary>
         /// Updates order
