@@ -1,12 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateOrder]
 	@Id bigint,
-	@LeadId bigint,
-	@StoreId int,
+	@LeadId bigint, 
 	@Amount decimal,
-	@PaymentTypeId int,
+	@Discount int,
+	@StoreId int,
 	@DeliveryTypeId int,
-	@StatusId int,
-	@Discount int
+	@PaymentTypeId int,
+	@StatusId int
 as
 	begin
 		Update [dbo].[Order] set
@@ -19,4 +19,5 @@ as
 		Discount = @Discount
 		
 		where(Id = @Id)
+		exec [dbo].[Order_SelectById] @Id
 	end

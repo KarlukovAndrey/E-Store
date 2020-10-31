@@ -8,5 +8,6 @@ namespace E_Shop.Data.Repositories
     public interface IOrderRepository
     {
         DataWrapper<OrderDTO> CreateOrder(OrderDTO dto);
+        DataWrapper<OrderDTO> UpdateOrder(OrderDTO dto);
     }
 }

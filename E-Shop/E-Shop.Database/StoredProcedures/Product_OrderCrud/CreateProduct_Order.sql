@@ -3,5 +3,8 @@
   @ProductId int,
   @Quantity int
 As
-  Insert into dbo.[Product_Order] (OrderId, ProductId, Quantity)
-  Values ( @OrderId, @ProductId, @Quantity)
+  insert into dbo.[Product_Order] (OrderId, ProductId, Quantity)
+  values ( @OrderId, @ProductId, @Quantity)
+  declare @ProductOrderId bigint
+set @ProductOrderId = SCOPE_IdENTITY()
+exec [dbo].[ProductOrderSelectById] @ProductOrderId

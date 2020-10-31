@@ -10,5 +10,6 @@ namespace E_Shop.Business.Managers
     public interface IOrderManager
     {
         DataWrapper<OrderOutputModel> CreateOrder(OrderInputModel model);
+        DataWrapper<OrderOutputModel> UpdateOrder(OrderInputModel model);
     }
 }

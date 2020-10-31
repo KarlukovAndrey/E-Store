@@ -10,5 +10,6 @@ namespace E_Shop.Data.Repositories
         public const string SearchLead = "[SearchLead]";
         public const string UpdateLeadAddress = "[UpdateLeadAddress]";
         public const string CreateOrderProcedure = "[CreateOrder]";
+        public const string UpdateOrder = "[UpdateOrder]";
     }
 }
