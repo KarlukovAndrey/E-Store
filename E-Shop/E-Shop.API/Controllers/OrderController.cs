@@ -42,7 +42,7 @@ namespace E_Shop.API.Controllers
         ///        "StoredId": 1,
         ///        "PaymentTypeId": 1,
         ///        "DeliveryTypeId": 1,
-        ///        "StatusId": 2
+        ///        "StatusId": 1
         ///     }
         ///
         /// </remarks>      
@@ -73,16 +73,28 @@ namespace E_Shop.API.Controllers
         ///        "StoredId": 1,
         ///        "PaymentTypeId": 1,
         ///        "DeliveryTypeId": 1,
-        ///        "StatusId": 2
+        ///        "StatusId": 1
         ///     }
         ///
         /// </remarks>      
         /// <returns> Order Output Model</returns>
-        [HttpPut]
+        [HttpPut("update")]
         public ActionResult<OrderOutputModel> UpdateOrder([FromBody] OrderInputModel model)
         {
-            return null;
+            var result = _orderManager.UpdateOrder(model);
+
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+
         }
+
         /// <summary>
         /// Universal order search
         /// </summary>

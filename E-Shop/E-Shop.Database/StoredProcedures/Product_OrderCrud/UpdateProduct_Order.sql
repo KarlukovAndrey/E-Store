@@ -10,3 +10,4 @@ set
     OrderId = @OrderId,
     Quantity = @Quantity
 where(@Id = Id)
+exec [dbo].[Order_SelectById] @OrderId

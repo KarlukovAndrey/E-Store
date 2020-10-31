@@ -54,7 +54,57 @@ namespace E_Shop.Data.Repositories
                 result.ErrorMessage = ex.Message;
             }
             return result;
-
         }
+        public DataWrapper<OrderDTO> UpdateOrder(OrderDTO dto)
+        {
+            var data = new DataWrapper<OrderDTO>();
+            try
+            {
+                data.Data = DbConnection.Query<OrderDTO, StoreDTO, PaymentTypeDTO, DeliveryTypeDTO, StatusDTO, OrderDTO>(
+                StoredProcedure.UpdateOrder,
+                (order, store, paymentType, deliveryType, status) =>
+                {
+                    order.Store = store;
+                    order.PaymentType = paymentType;
+                    order.DeliveryType = deliveryType;
+                    order.Status = status;
+                    return order;
+                },
+                new
+                {
+                    
+                    dto.Id,
+                    dto.LeadId,
+                    dto.Amount,
+                    dto.Discount,
+                    StoreId = dto.Store.Id,
+                    PaymentTypeId = dto.PaymentType.Id,
+                    DeliveryTypeId = dto.DeliveryType.Id,
+                    StatusId = dto.Status.Id
+                },
+                splitOn: "Id",
+                commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                data.ErrorMessage = ex.Message;
+            }
+            return data;
+        }
+
+        public DataWrapper<ProductOrderDTO> AddProductToOrder(ProductOrderDTO dto)
+        {
+            var result = new DataWrapper<ProductOrderDTO>
+            try
+            {
+                result.Data = DbConnection.Query <
+            }
+            catch(Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+        }
+
     }
 }

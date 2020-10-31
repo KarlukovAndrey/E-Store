@@ -4,4 +4,5 @@
 	[ProductId] INT NOT NULL FOREIGN KEY ([ProductId]) REFERENCES [Product]([Id]),
 	[StoreId] INT FOREIGN KEY ([StoreId]) REFERENCES [Store]([Id]) NOT NULL,
 	[Quantity] INT NOT NULL,
+	[IsDeleted] bit DEFAULT '0' NOT NULL 
 )

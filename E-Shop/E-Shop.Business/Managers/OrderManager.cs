@@ -32,5 +32,16 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
+        public DataWrapper<OrderOutputModel> UpdateOrder(OrderInputModel model)
+        {
+            var orderDTO = _mapper.Map<OrderDTO>(model);
+            var data = _orderRepository.UpdateOrder(orderDTO);
+            var mapperData = _mapper.Map<OrderOutputModel>(data.Data);
+            return new DataWrapper<OrderOutputModel>
+            {
+                Data = mapperData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
     }
 }
