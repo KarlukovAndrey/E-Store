@@ -105,6 +105,20 @@ namespace E_Shop.API.Controllers
             return null;
         }
 
+        [HttpPost("add-product-to-order")]
+        public ActionResult<ProductOrderOutputModel> AddProductToOrder([FromBody] ProductOrderInputModel model)
+        {
+            var result = _orderManager.AddProductToOrder(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+        }
         //[HttpGet("all_orders_by_lead/{id}")]
         //public ActionResult<List<OrderOutputModel>> GetAllOrdersByLeadId(long id) 
         //{

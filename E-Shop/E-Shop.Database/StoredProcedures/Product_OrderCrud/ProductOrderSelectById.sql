@@ -2,8 +2,6 @@
   @Id bigint
 as
   select
-  P.Id, P.[Name], P.Price, P.Brand,
-  PrO.Id, PrO.OrderId, PrO.Quantity
-  from [dbo].[Product_Order] as PrO
-  join dbo.Product as P on P.Id = PrO.ProductId
-where(@Id = PrO.Id and IsDeleted = 0)
+  P.Id, P.OrderId, P.Quantity
+  from [dbo].[Product_Order] as P
+where(@Id = P.Id and IsDeleted = 0)

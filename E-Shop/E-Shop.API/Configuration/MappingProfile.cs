@@ -40,6 +40,10 @@ namespace E_Shop.API.Configuration
 
             CreateMap<OrderDTO, OrderOutputModel>()
                 .ForPath(dest => dest.OrderDate, o => o.MapFrom(src => src.OrderDate.ToString(_longDateFormat)));
+
+            CreateMap<ProductOrderInputModel, ProductOrderDTO>();
+
+            CreateMap<ProductOrderDTO, ProductOrderOutputModel>();
         }
     }
 }

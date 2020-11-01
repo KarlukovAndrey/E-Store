@@ -11,5 +11,6 @@ namespace E_Shop.Business.Managers
     {
         DataWrapper<OrderOutputModel> CreateOrder(OrderInputModel model);
         DataWrapper<OrderOutputModel> UpdateOrder(OrderInputModel model);
+        DataWrapper<ProductOrderOutputModel> AddProductToOrder(ProductOrderInputModel model);
     }
 }

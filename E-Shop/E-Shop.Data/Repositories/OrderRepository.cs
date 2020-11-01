@@ -95,15 +95,25 @@ namespace E_Shop.Data.Repositories
 
         public DataWrapper<ProductOrderDTO> AddProductToOrder(ProductOrderDTO dto)
         {
-            var result = new DataWrapper<ProductOrderDTO>
+            var result = new DataWrapper<ProductOrderDTO>();
             try
             {
-                result.Data = DbConnection.Query <
+                result.Data = DbConnection.Query<ProductOrderDTO>(
+                    StoredProcedure.CreateProductOrder,                 
+                    new
+                    {
+                        dto.OrderId,
+                        dto.ProductId,
+                        dto.Quantity
+                    },                
+                     commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
             }
             catch(Exception ex)
             {
                 result.ErrorMessage = ex.Message;
             }
+            return result;
         }
 
     }
