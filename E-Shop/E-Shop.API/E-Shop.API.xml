@@ -91,7 +91,7 @@
              </remarks>      
              <returns> Order Output Model</returns>
         </member>
-        <member name="M:E_Shop.API.Controllers.OrderController.GetResultSearch">
+        <member name="M:E_Shop.API.Controllers.OrderController.GetResultSearch(E_Shop.Business.Models.Input.SearchOrderInputModel)">
             <summary>
             Universal order search
             </summary>

@@ -13,6 +13,8 @@ namespace E_Shop.Business.Managers
         DataWrapper<OrderOutputModel> UpdateOrder(OrderInputModel model);
         DataWrapper<ProductOrderOutputModel> AddProductToOrder(ProductOrderInputModel model);
         DataWrapper<List<OrderOutputModel>> FindOrders(SearchOrderInputModel model);
+        DataWrapper<ProductOrderOutputModel> UpdateProductOrder(ProductOrderInputModel model);
+
 
     }
 }

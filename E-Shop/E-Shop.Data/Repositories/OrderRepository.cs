@@ -116,6 +116,28 @@ namespace E_Shop.Data.Repositories
             return result;
         }
 
+        public DataWrapper<ProductOrderDTO> UpdateProduсtOrder(ProductOrderDTO dto)
+        {
+            var result = new DataWrapper<ProductOrderDTO>();
+            try
+            {
+                result.Data = DbConnection.Query<ProductOrderDTO>(
+                   StoredProcedure.UpdateProductOrder,
+                   new
+                   {
+                       dto.Id,
+                       dto.ProductId,
+                       dto.Quantity
+                   },
+                    commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
         public DataWrapper<List<OrderDTO>> SearchOrder(SearchOrderDTO dto)
         {
             var data = new DataWrapper<List<OrderDTO>>();
