@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using AutoMapper;
+using E_Shop.API.Auth;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace E_Shop.API
 {
@@ -46,6 +49,24 @@ namespace E_Shop.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                           .AddJwtBearer(options =>
+                           {
+                               options.RequireHttpsMetadata = false;
+                               options.TokenValidationParameters = new TokenValidationParameters
+                               {
+                                   ValidateIssuer = true,
+                                   ValidIssuer = AuthOptions.ISSUER,
+
+                                   ValidateAudience = true,
+                                   ValidAudience = AuthOptions.AUDIENCE,
+                                   ValidateLifetime = true,
+
+                                   IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                                   ValidateIssuerSigningKey = true,
+                               };
+                           });
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,6 +75,7 @@ namespace E_Shop.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -65,7 +87,9 @@ namespace E_Shop.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -92,5 +92,6 @@
     <Build Include="StoredProcedures\OrderCrud\Order_SelectById.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\ProductOrderSelectById.sql" />
     <Build Include="StoredProcedures\OrderCrud\SearchOrder.sql" />
+    <Build Include="StoredProcedures\LeadCrud\SelectLeadByLogin.sql" />
   </ItemGroup>
 </Project>

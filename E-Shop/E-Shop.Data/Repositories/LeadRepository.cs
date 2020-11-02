@@ -89,6 +89,22 @@ namespace E_Shop.Data.Repositories
             return data;
         }
 
+        public LeadDTO SelectLeadByLogin(string login)
+        {
+            var lead = DbConnection.Query<LeadDTO, CityDTO, RoleDTO, LeadDTO>(
+                 StoredProcedure.SelectLeadByLoginProcedure,
+                 (lead, city, role) =>
+                 {
+                     lead.Role = role;
+                     lead.City = city;
+                     return lead;
+                 },
+                 new { login },
+                 splitOn: "Id",
+                 commandType: CommandType.StoredProcedure
+                 ).SingleOrDefault();
+            return lead;
+        }
         public DataWrapper<LeadDTO> DeleteLeadById(long id)
         {
             var data = new DataWrapper<LeadDTO>();

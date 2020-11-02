@@ -12,5 +12,6 @@ namespace E_Shop.Data.Repositories
         DataWrapper<LeadDTO> DeleteLeadById(long Id);
         DataWrapper<List<LeadDTO>> SearchLead(SearchDTO searchDto);
         DataWrapper<LeadDTO> UpdateLeadAddress(UpdateLeadAddressDTO dto);
+        LeadDTO SelectLeadByLogin(string login);
     }
 }
