@@ -116,5 +116,44 @@ namespace E_Shop.Data.Repositories
             return result;
         }
 
+        public DataWrapper<List<OrderDTO>> SearchOrder(SearchOrderDTO dto)
+        {
+            var data = new DataWrapper<List<OrderDTO>>();
+            try
+            {
+                data.Data = DbConnection.Query<OrderDTO, StoreDTO, PaymentTypeDTO, DeliveryTypeDTO, StatusDTO,OrderDTO>(
+                    StoredProcedure.SearchOrder,
+                    (order, store, paymentType, deliveryType, status) =>
+                    {
+                        order.Store = store;
+                        order.PaymentType = paymentType;
+                        order.DeliveryType = deliveryType;
+                        order.Status = status;
+                        return order;
+                    },
+                    new
+                    { 
+                        dto.Id,
+                        dto.LeadId,
+                        dto.AmountFrom,
+                        dto.AmountTo,
+                        dto.OrderDateFrom,
+                        dto.OrderDateTo,
+                        StoreId = dto.Store?.Id,
+                        PaymentTypeId = dto.PaymentType?.Id,
+                        DeliveryTypeId = dto.DeliveryType?.Id,
+                        StatusId = dto.Status?.Id
+                    },
+                    splitOn: "Id",
+                    commandType: CommandType.StoredProcedure
+                ).ToList();
+            }
+            catch (Exception ex)
+            {
+                data.ErrorMessage = ex.Message;
+            }
+            return data;
+        }
+
     }
 }

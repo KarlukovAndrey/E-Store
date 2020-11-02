@@ -10,5 +10,7 @@ namespace E_Shop.Data.Repositories
         DataWrapper<OrderDTO> CreateOrder(OrderDTO dto);
         DataWrapper<OrderDTO> UpdateOrder(OrderDTO dto);
         DataWrapper<ProductOrderDTO> AddProductToOrder(ProductOrderDTO dto);
+        DataWrapper<List<OrderDTO>> SearchOrder(SearchOrderDTO dto);
+        
     }
 }
