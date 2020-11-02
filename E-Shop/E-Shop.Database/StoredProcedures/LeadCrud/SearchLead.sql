@@ -29,8 +29,8 @@ declare @resultSQL nvarchar(max) ='
 			L.[Email],
 			L.[Phone],
 			L.[IsDeleted],
-			C.Id,C.[Name],
-			R.Id, R.[Name]
+			R.Id, R.[Name],
+			C.Id,C.[Name]
 	FROM    [dbo].[Lead] as L
 	inner JOIN dbo.[City] as C on L.[CityId] = C.Id
 	INNER JOIN dbo.[Role] as R on L.[RoleId] = R.Id

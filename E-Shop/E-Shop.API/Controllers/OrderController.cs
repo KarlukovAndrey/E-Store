@@ -95,15 +95,8 @@ namespace E_Shop.API.Controllers
 
         }
 
-        /// <summary>
-        /// Universal order search
-        /// </summary>
-        /// <returns> List OrderOutputModels</returns>
-        [HttpPost("search")]
-        public ActionResult<List<OrderOutputModel>> GetResultSearch() //добавить search order input model
-        {
-            return null;
-        }
+        
+      
 
         [HttpPost("add-product-to-order")]
         public ActionResult<ProductOrderOutputModel> AddProductToOrder([FromBody] ProductOrderInputModel model)
@@ -119,10 +112,23 @@ namespace E_Shop.API.Controllers
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
-        //[HttpGet("all_orders_by_lead/{id}")]
-        //public ActionResult<List<OrderOutputModel>> GetAllOrdersByLeadId(long id) 
-        //{
-        //    return null;
-        //}
+        /// <summary>
+        /// Universal order search
+        /// </summary>
+        /// <returns> List OrderOutputModels</returns>
+        [HttpPost("search-orders")]
+        public ActionResult<List<OrderOutputModel>> GetResultSearch([FromBody] SearchOrderInputModel model)
+        {
+            var result = _orderManager.FindOrders(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+        }
     }
 }

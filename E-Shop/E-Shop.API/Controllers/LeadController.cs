@@ -115,7 +115,7 @@ namespace E_Shop.API.Controllers
         /// Universal lead search
         /// </summary>
         /// <returns>List LeadOutputModels</returns>
-        [HttpPost("search")]
+        [HttpPost("search-leads")]
         public ActionResult<List<LeadOutputModel>> GetResultSearch([FromBody] SearchInputModel model) 
         {
             var results = _leadManager.FindLeads(model);

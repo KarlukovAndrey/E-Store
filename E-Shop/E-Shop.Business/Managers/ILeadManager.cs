@@ -13,6 +13,5 @@ namespace E_Shop.Business.Managers
         DataWrapper<LeadOutputModel> UpdateLeadAddress(UpdateLeadAddressInputModel model);
         DataWrapper<LeadOutputModel> DeleteLead(long id);
         DataWrapper<List<LeadOutputModel>> FindLeads(SearchInputModel model);
-        DataWrapper<List<LeadOutputModel>> FindLeads(long id);
     }
 }
