@@ -79,10 +79,5 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
-
-        public DataWrapper<List<LeadOutputModel>> FindLeads(long id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

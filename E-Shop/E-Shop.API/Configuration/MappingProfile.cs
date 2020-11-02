@@ -29,9 +29,17 @@ namespace E_Shop.API.Configuration
                 .ForPath(dest => dest.BirthdayTo, o => o.MapFrom(src => src.BirthdayTo != null ? (DateTime?)DateTime.ParseExact(src.BirthdayTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
                 .ForPath(dest => dest.RegistrationDateFrom, o => o.MapFrom(src => src.RegistrationDateFrom != null ? (DateTime?)DateTime.ParseExact(src.RegistrationDateFrom, _shortDateFormat, CultureInfo.InvariantCulture) : null))
                 .ForPath(dest => dest.RegistrationDateTo, o => o.MapFrom(src => src.RegistrationDateTo != null ? (DateTime?)DateTime.ParseExact(src.RegistrationDateTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
-                .ForPath(dest => dest.Role, o => o.MapFrom(src => src.RoleId != null ? new RoleDTO() { Id = (int)src.RoleId } : null))
-                .ForPath(dest => dest.City, o => o.MapFrom(src => src.CityId != null ? new CityDTO() { Id = (int)src.CityId } : null));
-            
+                .ForPath(dest => dest.Role, o => o.MapFrom(src => src.RoleId != null ? new RoleDTO() { Id = (int)src.RoleId } : new RoleDTO()))
+                .ForPath(dest => dest.City, o => o.MapFrom(src => src.CityId != null ? new CityDTO() { Id = (int)src.CityId } : new CityDTO()));
+
+            CreateMap<SearchOrderInputModel, SearchOrderDTO>()
+                 .ForPath(dest => dest.OrderDateFrom, o => o.MapFrom(src => src.OrderDateFrom != null ? (DateTime?)DateTime.ParseExact(src.OrderDateFrom, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.OrderDateTo, o => o.MapFrom(src => src.OrderDateTo != null ? (DateTime?)DateTime.ParseExact(src.OrderDateTo, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.Store, o => o.MapFrom(src => src.StoreId != null ? new StoreDTO() { Id = (int)src.StoreId} : null))
+                .ForPath(dest => dest.PaymentType, o => o.MapFrom(src => src.PaymentTypeId != null ? new PaymentTypeDTO() { Id = (int)src.PaymentTypeId } : null))
+                .ForPath(dest => dest.DeliveryType, o => o.MapFrom(src => src.DeliveryTypeId != null ? new DeliveryTypeDTO() { Id = (int)src.DeliveryTypeId } : null))
+                .ForPath(dest => dest.Status, o => o.MapFrom(src => src.StatusId != null ? new StatusDTO() { Id = (int)src.StatusId } : null));
+
             CreateMap<UpdateLeadAddressInputModel, UpdateLeadAddressDTO>();
 
             CreateMap<OrderInputModel, OrderDTO>()

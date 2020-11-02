@@ -55,7 +55,19 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
-        //public DataWrapper<List<OrderOutputModel>> FindOrders(SearchOrderInputModel model)
+
+        public DataWrapper<List<OrderOutputModel>> FindOrders(SearchOrderInputModel model)
+        {
+            var serchDto = _mapper.Map<SearchOrderDTO>(model);
+            var data = _orderRepository.SearchOrder(serchDto);
+            var mappedData = _mapper.Map<List<OrderOutputModel>>(data.Data);
+
+            return new DataWrapper<List<OrderOutputModel>>
+            {
+                Data = mappedData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
 
     }
 }
