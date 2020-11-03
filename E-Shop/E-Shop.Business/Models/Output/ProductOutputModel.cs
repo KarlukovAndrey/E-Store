@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace E_Shop.Data.DTO
+namespace E_Shop.Business.Models.Output
 {
-    public class ProductDTO
+    public class ProductOutputModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Brand { get; set; }
         public string Description { get; set; }
         public string ManufactureCountry { get; set; }
-        public DateTime ManufactureDate { get; set; }
+        public string ManufactureDate { get; set; }
         public float Weight { get; set; }
-        public int? Wattage { get; set; }
-        public int? NoiseLevel { get; set; }
-        public int? PresetPrograms { get; set; }
+        public int Wattage { get; set; }
+        public int NoiseLevel { get; set; }
+        public int PresetPrograms { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
         public float Depth { get; set; }
         public float? ScreenSize { get; set; }
         public string Resolution { get; set; }
         public string DysplayType { get; set; }
-        public bool? ThreedimensionalTechnology { get; set;}
+        public bool? ThreedimensionalTechnology { get; set; }
         public bool? WetCleaning { get; set; }
         public float? DustContainerVolume { get; set; }
         public int? AttachmentsCount { get; set; }
