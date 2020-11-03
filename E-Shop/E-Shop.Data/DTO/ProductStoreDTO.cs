@@ -10,5 +10,6 @@ namespace E_Shop.Data.DTO
         public int ProductId { get; set; }
         public int StoreId { get; set; }
         public int Quantity { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }

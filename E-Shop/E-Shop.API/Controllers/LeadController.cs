@@ -83,20 +83,20 @@ namespace E_Shop.API.Controllers
         //    //return MakeResponse<List<LeadOutputModel>, LeadOutputModel>(result);
         //}
 
-        [HttpPut("{update-address}")]
-        public ActionResult<LeadOutputModel> UpdateLeadAddress([FromBody] UpdateLeadAddressInputModel model)
-        {
-            var result = _leadManager.UpdateLeadAddress(model);
-            if (result.IsOk)
-            {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
-            }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
-        }
+        //[HttpPut("{update-address}")]
+        //public ActionResult<LeadOutputModel> UpdateLeadAddress([FromBody] UpdateLeadAddressInputModel model)
+        //{
+        //    var result = _leadManager.UpdateLeadAddress(model);
+        //    if (result.IsOk)
+        //    {
+        //        if (result.Data == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(result.Data);
+        //    }
+        //    return Problem(detail: result.ErrorMessage, statusCode: 520);
+        //}
 
         /// <summary>
         /// Delete lead

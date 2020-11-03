@@ -54,7 +54,11 @@ namespace E_Shop.API.Configuration
             CreateMap<ProductOrderInputModel, ProductOrderDTO>();
 
             CreateMap<ProductOrderDTO, ProductOrderOutputModel>();
-           
+
+            CreateMap<ProductStoreInputModel, ProductStoreDTO>();
+
+            CreateMap<ProductStoreDTO, ProductStoreOutputModel>();
+
             CreateMap<LeadDTO, AuthOutputModel>()
                .ForPath(dest => dest.Role, o => o.MapFrom(src => src.Role.Name));
         }

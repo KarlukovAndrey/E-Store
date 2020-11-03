@@ -44,18 +44,18 @@ namespace E_Shop.Business.Managers
             };
         }
 
-        public DataWrapper<LeadOutputModel> UpdateLeadAddress(UpdateLeadAddressInputModel model)
-        {
-            var updateLeadAddressDto = _mapper.Map<UpdateLeadAddressDTO>(model);
-            var data = _leadRepository.UpdateLeadAddress(updateLeadAddressDto);
-            var mapperData = _mapper.Map<LeadOutputModel>(data.Data);
-            return new DataWrapper<LeadOutputModel>
-            {
-                Data = mapperData,
-                ErrorMessage = data.ErrorMessage
-            };
+        //public DataWrapper<LeadOutputModel> UpdateLeadAddress(UpdateLeadAddressInputModel model)
+        //{
+        //    var updateLeadAddressDto = _mapper.Map<UpdateLeadAddressDTO>(model);
+        //    var data = _leadRepository.UpdateLeadAddress(updateLeadAddressDto);
+        //    var mapperData = _mapper.Map<LeadOutputModel>(data.Data);
+        //    return new DataWrapper<LeadOutputModel>
+        //    {
+        //        Data = mapperData,
+        //        ErrorMessage = data.ErrorMessage
+        //    };
 
-        }
+        //}
         public DataWrapper<LeadOutputModel> DeleteLead(long id)
         {
             var data = _leadRepository.DeleteLeadById(id);
