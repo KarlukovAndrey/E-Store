@@ -60,24 +60,33 @@ namespace E_Shop.API.Controllers
         /// <param name="id"></param>
         /// <returns> Product model</returns>
         [HttpGet("{id}")]
-        public ActionResult<ProductModel> GetProduct(int id)
+        public ActionResult<ProductOutputModel> GetProduct(int id)
         {
             return null;
         }
 
-        [HttpPost]
-        public ActionResult<int> AddProduct([FromBody] ProductModel model)
+        [HttpPost("add")]
+        public ActionResult<int> AddProduct([FromBody] ProductInputModel model)
         {
-            return null;
+            var result = _productManager.AddProduct(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
         [HttpPut]
-        public ActionResult UpdateProduct([FromBody] ProductModel model)
+        public ActionResult UpdateProduct([FromBody] ProductOutputModel model)
         {
             return null;
         }
         [HttpPost("Search")]
-        public ActionResult<List<ProductModel>> GetResultSearch() // добавить SearchProductInputModel
+        public ActionResult<List<ProductOutputModel>> GetResultSearch() // добавить SearchProductInputModel
         {
             return null;
         }

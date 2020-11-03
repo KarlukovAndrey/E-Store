@@ -13,13 +13,13 @@ namespace E_Shop.Data.DTO
         public string Description { get; set; }
         public string ManufactureCountry { get; set; }
         public DateTime ManufactureDate { get; set; }
-        public float Weight { get; set; }
+        public float? Weight { get; set; }
         public int? Wattage { get; set; }
         public int? NoiseLevel { get; set; }
         public int? PresetPrograms { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
-        public float Depth { get; set; }
+        public float? Width { get; set; }
+        public float? Height { get; set; }
+        public float? Depth { get; set; }
         public float? ScreenSize { get; set; }
         public string Resolution { get; set; }
         public string DysplayType { get; set; }

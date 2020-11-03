@@ -11,5 +11,6 @@ namespace E_Shop.Business.Managers
     {
         DataWrapper<ProductStoreOutputModel> AddProductToStore(ProductStoreInputModel model);
         DataWrapper<ProductStoreOutputModel> UpdateProductStore(ProductStoreInputModel model);
+        DataWrapper<ProductOutputModel> AddProduct(ProductInputModel model);
     }
 }

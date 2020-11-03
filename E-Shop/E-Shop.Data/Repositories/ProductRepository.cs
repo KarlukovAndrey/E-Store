@@ -62,5 +62,60 @@ namespace E_Shop.Data.Repositories
             }
             return result;
         }
+
+        public DataWrapper<ProductDTO> AddProduct(ProductDTO dto)
+        {
+            var result = new DataWrapper<ProductDTO>();
+            try
+            {
+                result.Data = DbConnection.Query<ProductDTO>(
+                    StoredProcedure.CreateProduct,
+                    new
+                    {
+                        dto.Name,
+                        dto.Price,
+                        dto.Brand,
+                        dto.Description,
+                        dto.ManufactureCountry,
+                        dto.ManufactureDate,
+                        dto.Weight,
+                        dto.Wattage,
+                        dto.NoiseLevel,
+                        dto.PresetPrograms,
+                        dto.Width,
+                        dto.Height,
+                        dto.Depth,
+                        dto.ScreenSize,
+                        dto.Resolution,
+                        dto.DysplayType,
+                        dto.ThreedimensionalTechnology,
+                        dto.WetCleaning,
+                        dto.DustContainerVolume,
+                        dto.AttachmentsCount,
+                        dto.RemoteLaunch,
+                        dto.СleaningАrea,
+                        dto.TurnTableDiameter,
+                        dto.NumberOfProwerLevel,
+                        dto.Grill,
+                        dto.MicrowavesPower,
+                        dto.SimCardCount,
+                        dto.FrontСamera,
+                        dto.HeadphoneJack,
+                        dto.BatteryCapacity,
+                        dto.ConnectionStandard,
+                        dto.MinTemperatureFreezer,
+                        dto.ColdStorageTime,
+                        dto.Freezer,
+                        dto.Defrost
+                    },
+                     commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
+            }
+            catch(Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
     }
 }

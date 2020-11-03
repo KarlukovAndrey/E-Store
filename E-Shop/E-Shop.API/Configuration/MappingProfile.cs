@@ -60,6 +60,12 @@ namespace E_Shop.API.Configuration
 
             CreateMap<LeadDTO, AuthOutputModel>()
                .ForPath(dest => dest.Role, o => o.MapFrom(src => src.Role.Name));
+
+            CreateMap<ProductInputModel, ProductDTO>()
+                .ForPath(dest => dest.ManufactureDate, o => o.MapFrom(src => src.ManufactureDate != null ? (DateTime?)DateTime.ParseExact(src.ManufactureDate, _shortDateFormat, CultureInfo.InvariantCulture) : null));
+
+            CreateMap<ProductDTO, ProductOutputModel>()
+                .ForPath(dest => dest.ManufactureDate, o => o.MapFrom(src => src.ManufactureDate.ToString(_shortDateFormat)));
         }
     }
 }
