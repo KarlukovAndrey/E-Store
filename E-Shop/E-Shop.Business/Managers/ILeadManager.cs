@@ -10,7 +10,7 @@ namespace E_Shop.Business.Managers
     {
         DataWrapper<LeadOutputModel> CreateLead(LeadInputModel model);
         DataWrapper<LeadOutputModel> UpdateLead(LeadInputModel model);
-        DataWrapper<LeadOutputModel> UpdateLeadAddress(UpdateLeadAddressInputModel model);
+        //DataWrapper<LeadOutputModel> UpdateLeadAddress(UpdateLeadAddressInputModel model);
         DataWrapper<LeadOutputModel> DeleteLead(long id);
         DataWrapper<List<LeadOutputModel>> FindLeads(SearchInputModel model);
     }

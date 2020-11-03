@@ -37,6 +37,20 @@ namespace E_Shop.API.Controllers
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
+        [HttpPost("update-product-store")]
+        public ActionResult<ProductStoreOutputModel> UpdateProductStore([FromBody] ProductStoreInputModel model)
+        {
+            var result = _productManager.UpdateProductStore(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+        }
 
 
 

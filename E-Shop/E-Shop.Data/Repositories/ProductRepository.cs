@@ -38,5 +38,29 @@ namespace E_Shop.Data.Repositories
             }
             return result;
         }
+
+        public DataWrapper<ProductStoreDTO> UpdateProductStore(ProductStoreDTO dto)
+        {
+            var result = new DataWrapper<ProductStoreDTO>();
+            try
+            {
+                result.Data = DbConnection.Query<ProductStoreDTO>(
+                    StoredProcedure.UpdateProductStore,
+                    new
+                    {
+                        dto.Id,
+                        dto.StoreId,
+                        dto.Quantity,
+                        dto.IsDeleted
+                    },
+                    commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
     }
 }

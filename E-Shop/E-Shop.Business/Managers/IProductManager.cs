@@ -10,5 +10,6 @@ namespace E_Shop.Business.Managers
     public interface IProductManager
     {
         DataWrapper<ProductStoreOutputModel> AddProductToStore(ProductStoreInputModel model);
+        DataWrapper<ProductStoreOutputModel> UpdateProductStore(ProductStoreInputModel model);
     }
 }

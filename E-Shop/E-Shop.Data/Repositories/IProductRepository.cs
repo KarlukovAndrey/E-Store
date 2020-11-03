@@ -8,5 +8,6 @@ namespace E_Shop.Data.Repositories
     public interface IProductRepository
     {
         DataWrapper<ProductStoreDTO> AddProductToStore(ProductStoreDTO dto);
+        DataWrapper<ProductStoreDTO> UpdateProductStore(ProductStoreDTO dto);
     }
 }
