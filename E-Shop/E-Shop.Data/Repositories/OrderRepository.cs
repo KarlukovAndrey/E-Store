@@ -12,7 +12,7 @@ using System.Xml;
 
 namespace E_Shop.Data.Repositories
 {
-    public class OrderRepository: BaseRepository, IOrderRepository
+    public class OrderRepository : BaseRepository, IOrderRepository
     {
         public OrderRepository(IOptions<DBSettings> options)
         {
@@ -42,14 +42,14 @@ namespace E_Shop.Data.Repositories
                         StoreId = dto.Store.Id,
                         PaymentTypeId = dto.PaymentType.Id,
                         DeliveryTypeId = dto.DeliveryType.Id,
-                        StatusId = dto.Status.Id             
+                        StatusId = dto.Status.Id
                     },
                     splitOn: "Id",
                     commandType: CommandType.StoredProcedure
                     ).SingleOrDefault();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.ErrorMessage = ex.Message;
             }
@@ -72,7 +72,7 @@ namespace E_Shop.Data.Repositories
                 },
                 new
                 {
-                    
+
                     dto.Id,
                     dto.LeadId,
                     dto.Amount,
@@ -99,24 +99,23 @@ namespace E_Shop.Data.Repositories
             try
             {
                 result.Data = DbConnection.Query<ProductOrderDTO>(
-                    StoredProcedure.CreateProductOrder,                 
+                    StoredProcedure.CreateProductOrder,
                     new
                     {
                         dto.OrderId,
                         dto.ProductId,
                         dto.Quantity
-                    },                
+                    },
                      commandType: CommandType.StoredProcedure
                 ).SingleOrDefault();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.ErrorMessage = ex.Message;
             }
             return result;
         }
 
-      
 
         public DataWrapper<ProductOrderDTO> UpdateProduсtOrder(ProductOrderDTO dto)
         {
@@ -146,7 +145,7 @@ namespace E_Shop.Data.Repositories
             var data = new DataWrapper<List<OrderDTO>>();
             try
             {
-                data.Data = DbConnection.Query<OrderDTO, StoreDTO, PaymentTypeDTO, DeliveryTypeDTO, StatusDTO,OrderDTO>(
+                data.Data = DbConnection.Query<OrderDTO, StoreDTO, PaymentTypeDTO, DeliveryTypeDTO, StatusDTO, OrderDTO>(
                     StoredProcedure.SearchOrder,
                     (order, store, paymentType, deliveryType, status) =>
                     {
@@ -157,7 +156,7 @@ namespace E_Shop.Data.Repositories
                         return order;
                     },
                     new
-                    { 
+                    {
                         dto.Id,
                         dto.LeadId,
                         dto.AmountFrom,

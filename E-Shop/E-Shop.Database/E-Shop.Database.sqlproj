@@ -80,9 +80,7 @@
     <Build Include="StoredProcedures\LeadCrud\UpdateLeadById.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\CreateProduct_Order.sql" />
     <Build Include="StoredProcedures\Product_OrderCrud\UpdateProduct_Order.sql" />
-    <Build Include="StoredProcedures\Product_OrderCrud\DeleteProduct_Order.sql" />
     <Build Include="StoredProcedures\Product_StoreCrud\CreateProduct_Store.sql" />
-    <Build Include="StoredProcedures\Product_StoreCrud\DeleteProduct_Store.sql" />
     <Build Include="StoredProcedures\Product_StoreCrud\UpdateProduct_Store.sql" />
     <Build Include="StoredProcedures\OrderCrud\CreateOrder.sql" />
     <Build Include="StoredProcedures\OrderCrud\UpdateOrder.sql" />
