@@ -56,6 +56,17 @@ namespace E_Shop.Business.Managers
             };
         }
 
+        public DataWrapper<ProductOrderOutputModel> UpdateProductOrder(ProductOrderInputModel model)
+        {
+            var productOrderDTO = _mapper.Map<ProductOrderDTO>(model);
+            var data = _orderRepository.UpdateProduсtOrder(productOrderDTO);
+            var mapperData = _mapper.Map<ProductOrderOutputModel>(data.Data);
+            return new DataWrapper<ProductOrderOutputModel>
+            {
+                Data = mapperData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
         public DataWrapper<List<OrderOutputModel>> FindOrders(SearchOrderInputModel model)
         {
             var serchDto = _mapper.Map<SearchOrderDTO>(model);

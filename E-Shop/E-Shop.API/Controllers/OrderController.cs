@@ -112,6 +112,23 @@ namespace E_Shop.API.Controllers
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
+
+
+        [HttpPost("update-product_order")]
+        public ActionResult<ProductOrderOutputModel> UpdateProductOrder([FromBody] ProductOrderInputModel model)
+        {
+            var result = _orderManager.UpdateProductOrder(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+
+        }
         /// <summary>
         /// Universal order search
         /// </summary>
