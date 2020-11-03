@@ -2,7 +2,7 @@
   @Id BIGINT,
   @FirstName NVARCHAR(50),
   @LastName NVARCHAR(50),
-  @Birthday DATETIME2,
+  @Birthday DATE,
   @Address NVARCHAR(40),
   @CityId INT,
   @Phone NVARCHAR(20),

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using E_Shop.Business.Managers;
 using E_Shop.Data;
+using System.Text;
+using E_Shop.API.Services;
 
 namespace E_Shop.API.Controllers
 {
@@ -16,23 +18,13 @@ namespace E_Shop.API.Controllers
     public class LeadController : ControllerBase
     {
         private ILeadManager _leadManager;
-        public LeadController(ILeadManager leadManager) 
+        private LeadValidation _leadValidation;
+        public LeadController(ILeadManager leadManager, LeadValidation leadValidation) 
         {
             _leadManager = leadManager;
+            _leadValidation = leadValidation;
         }
-
-        /// <summary>
-        /// Get Lead by id
-        /// </summary>  
-        /// <param name="id"></param>
-        /// <returns> Lead Output Model</returns>
-        [HttpGet("{id}")]
-        public ActionResult<LeadOutputModel> GetLead(long id)
-        {
-            //var result = _leadManager.FindLeads(id)
-            return null;
-        }
-
+              
         /// <summary>
         /// Create lead
         /// </summary>
@@ -57,6 +49,11 @@ namespace E_Shop.API.Controllers
         [HttpPost("add")]
         public ActionResult<LeadOutputModel> AddLead([FromBody] LeadInputModel model)
         {
+            string validationResult = _leadValidation.ValidateLeadInputModel(model);
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return UnprocessableEntity(validationResult);
+            }
             var result = _leadManager.CreateLead(model);
             if (result.IsOk)
             {
@@ -69,34 +66,29 @@ namespace E_Shop.API.Controllers
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
-    
-        //[HttpPut]
-        //public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
-        //{
-        //    //add lead validation
-        //    //if (!string.IsNullOrEmpty(validationResult))
-        //    //{
-        //    //    return UnprocessableEntity(validationResult);
-        //    //}
 
-        //    //var result = _leadManager.UpdateLead(model);
-        //    //return MakeResponse<List<LeadOutputModel>, LeadOutputModel>(result);
-        //}
+        [HttpPut("update")]
+        public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
+        {
+            string validationResult = _leadValidation.ValidateLeadInputModelForUpdate(model);
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return UnprocessableEntity(validationResult);
+            }
+            var result = _leadManager.UpdateLead(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
 
-        //[HttpPut("{update-address}")]
-        //public ActionResult<LeadOutputModel> UpdateLeadAddress([FromBody] UpdateLeadAddressInputModel model)
-        //{
-        //    var result = _leadManager.UpdateLeadAddress(model);
-        //    if (result.IsOk)
-        //    {
-        //        if (result.Data == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return Ok(result.Data);
-        //    }
-        //    return Problem(detail: result.ErrorMessage, statusCode: 520);
-        //}
+        }
+
+       
 
         /// <summary>
         /// Delete lead
@@ -107,7 +99,12 @@ namespace E_Shop.API.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteLead(long id)
         {
-           var result = _leadManager.DeleteLead(id);
+            var validationResult = _leadValidation.ValidateIdValue(id);
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return UnprocessableEntity(validationResult);
+            }
+            var result = _leadManager.DeleteLead(id);
             return Ok(result.Data);
         }
 
