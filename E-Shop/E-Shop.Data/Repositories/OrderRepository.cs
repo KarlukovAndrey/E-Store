@@ -129,7 +129,8 @@ namespace E_Shop.Data.Repositories
                    {
                        dto.Id,
                        dto.ProductId,
-                       dto.Quantity
+                       dto.Quantity,
+                       dto.IsDeleted
                    },
                     commandType: CommandType.StoredProcedure
                 ).SingleOrDefault();

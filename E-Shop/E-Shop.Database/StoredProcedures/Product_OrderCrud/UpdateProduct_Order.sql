@@ -1,14 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateProduct_Order]
 	@Id bigint,
     @ProductId bigint,
-    @Quantity int
-    
+    @Quantity int,
+    @IsDeleted bit
 As
 Update dbo.[Product_Order]
 set
     ProductId = @ProductId,
-    Quantity = @Quantity
+    Quantity = @Quantity,
+    IsDeleted = @IsDeleted
    
-where(@Id = Id and IsDeleted = 0)
+where(@Id = Id)
 exec [dbo].[ProductOrderSelectById] @Id
 
