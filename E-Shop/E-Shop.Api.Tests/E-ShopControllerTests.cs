@@ -44,5 +44,15 @@ namespace E_Shop.Api.Tests
             var outputModel = response.Content.ReadAsAsync<LeadOutputModel>().Result;
             outputModel.Should().BeEquivalentTo(model, options => options.Excluding(o => o.Id).ExcludingMissingMembers());
         }
+        [TestCaseSource(typeof(LeadInputModelMockForUpdate))]
+        public async Task UpdateLeadTest(LeadInputModel model)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8,
+                      "application/json");
+            var response = await _client.PutAsync(RouteString.updateLead, content);
+            var outputModel = response.Content.ReadAsAsync<LeadOutputModel>().Result;
+            outputModel.Should().BeEquivalentTo(model, options => options.ExcludingMissingMembers());
+
+        }
     }
 }
