@@ -4,13 +4,6 @@
         <name>E-Shop.API</name>
     </assembly>
     <members>
-        <member name="M:E_Shop.API.Controllers.LeadController.GetLead(System.Int64)">
-            <summary>
-            Get Lead by id
-            </summary>  
-            <param name="id"></param>
-            <returns> Lead Output Model</returns>
-        </member>
         <member name="M:E_Shop.API.Controllers.LeadController.AddLead(E_Shop.Business.Models.Input.LeadInputModel)">
              <summary>
              Create lead

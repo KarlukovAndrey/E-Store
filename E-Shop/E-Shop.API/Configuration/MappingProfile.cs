@@ -40,7 +40,6 @@ namespace E_Shop.API.Configuration
                 .ForPath(dest => dest.DeliveryType, o => o.MapFrom(src => src.DeliveryTypeId != null ? new DeliveryTypeDTO() { Id = (int)src.DeliveryTypeId } : null))
                 .ForPath(dest => dest.Status, o => o.MapFrom(src => src.StatusId != null ? new StatusDTO() { Id = (int)src.StatusId } : null));
 
-            CreateMap<UpdateLeadAddressInputModel, UpdateLeadAddressDTO>();
 
             CreateMap<OrderInputModel, OrderDTO>()
                 .ForPath(dest => dest.Store, o => o.MapFrom(src => new StoreDTO() { Id = src.StoredId}))
