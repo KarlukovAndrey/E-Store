@@ -10,6 +10,7 @@ namespace E_Shop.Business.Models.Input
         public long? OrderId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+        public bool? IsDeleted { get; set; }
 
     }
 }
