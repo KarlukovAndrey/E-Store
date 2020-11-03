@@ -16,6 +16,9 @@ namespace E_Shop.API.Configuration
             builder.RegisterType<LeadManager>().As<ILeadManager>().SingleInstance();
             builder.RegisterType<TokenService>().SingleInstance();
             builder.RegisterType<AuthManager>().SingleInstance();
+            builder.RegisterType<ProductManager>().As<IProductManager>().SingleInstance();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
+
         }
     }
 }

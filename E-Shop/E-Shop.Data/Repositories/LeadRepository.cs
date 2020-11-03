@@ -130,33 +130,33 @@ namespace E_Shop.Data.Repositories
             return data;
         }
         
-        public DataWrapper<LeadDTO> UpdateLeadAddress(UpdateLeadAddressDTO dto)
-        {
-            var data = new DataWrapper<LeadDTO>();
-            try
-            {
-                data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
-                    StoredProcedure.UpdateLeadAddress,
-                     (lead, role, city) =>
-                     {
-                         lead.Role = role;
-                         lead.City = city;
-                         return lead;
-                     }, new 
-                     {
-                         dto.Id,
-                         dto.Address
-                     },
-                     splitOn: "Id",
-                     commandType: CommandType.StoredProcedure).
-                     SingleOrDefault();
-            }
-            catch (Exception ex) 
-            {
-                data.ErrorMessage = ex.Message;
-            }
-            return data;
-        }
+        //public DataWrapper<LeadDTO> UpdateLeadAddress(UpdateLeadAddressDTO dto)
+        //{
+        //    var data = new DataWrapper<LeadDTO>();
+        //    try
+        //    {
+        //        data.Data = DbConnection.Query<LeadDTO, RoleDTO, CityDTO, LeadDTO>(
+        //            StoredProcedure.UpdateLeadAddress,
+        //             (lead, role, city) =>
+        //             {
+        //                 lead.Role = role;
+        //                 lead.City = city;
+        //                 return lead;
+        //             }, new 
+        //             {
+        //                 dto.Id,
+        //                 dto.Address
+        //             },
+        //             splitOn: "Id",
+        //             commandType: CommandType.StoredProcedure).
+        //             SingleOrDefault();
+        //    }
+        //    catch (Exception ex) 
+        //    {
+        //        data.ErrorMessage = ex.Message;
+        //    }
+        //    return data;
+        //}
         public DataWrapper<List<LeadDTO>> SearchLead(SearchDTO searchDto)
         {
             var data = new DataWrapper<List<LeadDTO>>();
