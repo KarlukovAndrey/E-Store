@@ -18,6 +18,7 @@ namespace E_Shop.Data.Repositories
         public const string CreateProductStore = "[CreateProduct_Store]";
         public const string UpdateProductStore = "[UpdateProduct_Store]";
         public const string CreateProduct = "[CreateProduct]";
+        public const string GetQuantityProductInStore = "[GetQuantityProductInStore]";
 
     }
 }

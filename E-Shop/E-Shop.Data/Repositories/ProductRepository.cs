@@ -117,5 +117,27 @@ namespace E_Shop.Data.Repositories
             }
             return result;
         }
+
+        public DataWrapper<int?> GetQuantityProductInStore(int productId, int storeId)
+        {
+            var result = new DataWrapper<int?>();
+            try
+            {
+                result.Data = DbConnection.Query<int?>(
+                    StoredProcedure.GetQuantityProductInStore,
+                    new
+                    {
+                        productId,
+                        storeId
+                    },
+                     commandType: CommandType.StoredProcedure
+                ).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
     }
 }

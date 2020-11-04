@@ -51,9 +51,6 @@ namespace E_Shop.API.Controllers
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
-
-
-
         /// <summary>
         /// Get Product by id
         /// </summary>  
@@ -94,11 +91,16 @@ namespace E_Shop.API.Controllers
         [HttpGet("quantity/{productId}/{storeId}")]
         public ActionResult<int> GetProductQuantityInStore(int productId, int storeId) 
         {
-            return null;
+            var result = _productManager.GetQuantityProductInStore(productId, storeId);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
-
-       
-
-
     }
 }

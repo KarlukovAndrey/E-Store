@@ -19,16 +19,6 @@ namespace E_Shop.API.Controllers
         {
             _orderManager = orderManager;
         }
-        /// <summary>
-        /// Get Order by id
-        /// </summary>  
-        /// <param name="id"></param>
-        /// <returns> Order Output Model</returns>
-        [HttpGet("{id}")]
-        public ActionResult<OrderOutputModel> GetOrder(long id)
-        {
-            return null;
-        }
 
         /// <summary>
         /// Creates order
@@ -129,6 +119,7 @@ namespace E_Shop.API.Controllers
             return Problem(detail: result.ErrorMessage, statusCode: 520);
 
         }
+
         /// <summary>
         /// Universal order search
         /// </summary>

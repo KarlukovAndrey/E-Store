@@ -55,5 +55,15 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
+
+        public DataWrapper<int?> GetQuantityProductInStore(int productId, int storeId)
+        {
+            var data = _productRepository.GetQuantityProductInStore(productId, storeId);
+            return new DataWrapper<int?>
+            {
+                Data = data.Data,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
     }
 }

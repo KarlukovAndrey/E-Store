@@ -39,13 +39,6 @@
             </summary>
             <returns>List LeadOutputModels</returns>
         </member>
-        <member name="M:E_Shop.API.Controllers.OrderController.GetOrder(System.Int64)">
-            <summary>
-            Get Order by id
-            </summary>  
-            <param name="id"></param>
-            <returns> Order Output Model</returns>
-        </member>
         <member name="M:E_Shop.API.Controllers.OrderController.AddOrder(E_Shop.Business.Models.Input.OrderInputModel)">
              <summary>
              Creates order

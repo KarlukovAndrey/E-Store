@@ -10,5 +10,6 @@ namespace E_Shop.Data.Repositories
         DataWrapper<ProductStoreDTO> AddProductToStore(ProductStoreDTO dto);
         DataWrapper<ProductStoreDTO> UpdateProductStore(ProductStoreDTO dto);
         DataWrapper<ProductDTO> AddProduct(ProductDTO dto);
+        DataWrapper<int?> GetQuantityProductInStore(int productId, int storeId);
     }
 }
