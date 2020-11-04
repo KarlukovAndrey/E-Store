@@ -6,7 +6,7 @@
 	  Set IsDeleted = 1
 	  where(@Id = Id)
 	  Select
-	  L.Id, L.FirstName, L.LastName ,L.RegistrationDate,L.Birthday, L.Address, L.Email, L.Phone,
+	  L.Id, L.FirstName, L.LastName ,L.RegistrationDate,L.Birthday, L.Address, L.Email, L.Phone,L.IsDeleted,
 	  R.Id, R.Name,
 	  C.Id, C.Name
 	  From [dbo].[Lead] as L
