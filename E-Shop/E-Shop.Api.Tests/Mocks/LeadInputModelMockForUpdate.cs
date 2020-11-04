@@ -43,7 +43,7 @@ namespace E_Shop.Api.Tests.Mocks
 
         private string SetString()
         {
-            _emailString = RandomString.GetRandomString("abcdefghijklmnopqrstuvwxyz", 10) + "@test.ru";
+            _emailString = RandomString.GetRandomString("abcdefasfavzxaxyz", 10) + "@test.ru";
             return _emailString;
         }
     }
