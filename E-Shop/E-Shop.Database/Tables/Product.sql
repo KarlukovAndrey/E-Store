@@ -28,7 +28,7 @@
 	[Grill] bit NULL,
 	[MicrowavesPower] int NULL,
 	[SimCardCount] int NULL,
-	[FrontСamera] bit NULL,
+	[FrontCamera] bit NULL,
 	[HeadphoneJack] bit NULL,
 	[BatteryCapacity] int NULL,
 	[ConnectionStandard] nvarchar(20) NULL,

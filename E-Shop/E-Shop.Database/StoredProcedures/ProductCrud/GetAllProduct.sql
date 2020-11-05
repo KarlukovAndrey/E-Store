@@ -1,8 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[Product_SelectById]
-	@ProductId int
-AS
-	SELECT 
-	P.[Id],
+﻿CREATE PROCEDURE [dbo].[GetAllProduct]
+as
+SELECT 
+    P.[Id],
 	P.[Name],
 	P.[Price],
 	P.[Brand],
@@ -38,5 +37,4 @@ AS
 	P.[ColdStorageTime], 
 	P.[Freezer], 
 	P.[Defrost] 
-	from [dbo].[Product] as P
-where(@ProductId = P.Id)
+from dbo.[Product] as P

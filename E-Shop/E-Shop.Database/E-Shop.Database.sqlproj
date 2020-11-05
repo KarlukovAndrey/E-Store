@@ -94,6 +94,8 @@
     <Build Include="StoredProcedures\Product_StoreCrud\ProductStoreSelectById.sql" />
     <Build Include="StoredProcedures\ProductCrud\CreateProduct.sql" />
     <Build Include="StoredProcedures\ProductCrud\Product_SelectById.sql" />
-    <Build Include="StoredProcedures\Product_StoreCrud\GetQuantityProductInStore.sql" />
+    <Build Include="StoredProcedures\Product_StoreCrud\GetProductStore.sql" />
+    <Build Include="StoredProcedures\ProductCrud\UpdateProductById.sql" />
+    <Build Include="StoredProcedures\ProductCrud\GetAllProduct.sql" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using E_Shop.API.Services;
+using E_Shop.Business;
 using E_Shop.Business.Managers;
 using E_Shop.Data.Repositories;
 
@@ -19,6 +20,7 @@ namespace E_Shop.API.Configuration
             builder.RegisterType<AuthManager>().SingleInstance();
             builder.RegisterType<ProductManager>().As<IProductManager>().SingleInstance();
             builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
+            builder.RegisterType<Category>().As<ICategory>().SingleInstance();
 
         }
     }

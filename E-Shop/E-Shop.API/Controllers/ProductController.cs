@@ -77,21 +77,40 @@ namespace E_Shop.API.Controllers
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
-        [HttpPut]
-        public ActionResult UpdateProduct([FromBody] ProductOutputModel model)
+        [HttpPut("update")]
+        public ActionResult<ProductOutputModel> UpdateProduct([FromBody] ProductInputModel model)
         {
-            return null;
+            var result = _productManager.UpdateProduct(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
-        [HttpPost("Search")]
-        public ActionResult<List<ProductOutputModel>> GetResultSearch() // добавить SearchProductInputModel
+
+        [HttpGet("all-product/{category}")]
+        public ActionResult<List<ProductOutputModel>> GetAllProductByType(int category)
         {
-            return null;
+            var result = _productManager.GetAllProductByType(category);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
         [HttpGet("quantity/{productId}/{storeId}")]
-        public ActionResult<int> GetProductQuantityInStore(int productId, int storeId) 
+        public ActionResult<ProductStoreOutputModel> GetProductStore(int productId, int storeId) 
         {
-            var result = _productManager.GetQuantityProductInStore(productId, storeId);
+            var result = _productManager.GetProductStore(productId, storeId);
             if (result.IsOk)
             {
                 if (result.Data == null)

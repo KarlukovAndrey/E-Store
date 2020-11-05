@@ -15,9 +15,11 @@ namespace E_Shop.API.Controllers
     public class OrderController : ControllerBase
     {
         private IOrderManager _orderManager;
-        public OrderController(IOrderManager orderManager)
+        private IProductManager _productManager;
+        public OrderController(IOrderManager orderManager, IProductManager productManager)
         {
             _orderManager = orderManager;
+            _productManager = productManager;
         }
 
         /// <summary>

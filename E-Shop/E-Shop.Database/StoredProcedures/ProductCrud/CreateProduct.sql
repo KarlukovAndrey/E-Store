@@ -65,7 +65,7 @@
 			Grill,
 			MicrowavesPower,
 			SimCardCount,
-			FrontСamera,
+			FrontCamera,
 			HeadphoneJack,
 			BatteryCapacity,
 			ConnectionStandard,

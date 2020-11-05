@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using E_Shop.Business.ErrorResponse;
 using E_Shop.Business.Models.Input;
 using E_Shop.Business.Models.Output;
 using E_Shop.Data;
@@ -13,12 +14,16 @@ namespace E_Shop.Business.Managers
     public class OrderManager : IOrderManager
     {
         private IOrderRepository _orderRepository;
+        private IProductRepository _productRepository;
         private IMapper _mapper;
+       
 
-        public OrderManager(IOrderRepository orderRepository, IMapper mapper)
+        public OrderManager(IOrderRepository orderRepository, IProductRepository productRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
             _mapper = mapper;
+
         }
 
         public DataWrapper<OrderOutputModel> CreateOrder(OrderInputModel model)
@@ -43,17 +48,39 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
-
+        // ДОДЕЛАТЬ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public DataWrapper<ProductOrderOutputModel> AddProductToOrder(ProductOrderInputModel model)
         {
-            var productOrderDTO = _mapper.Map<ProductOrderDTO>(model);
-            var data = _orderRepository.AddProductToOrder(productOrderDTO);
-            var mapperData = _mapper.Map<ProductOrderOutputModel>(data.Data);
-            return new DataWrapper<ProductOrderOutputModel>
+            var request = _orderRepository.SearchOrder(new SearchOrderDTO() { Id = model.OrderId });
+            var result = new DataWrapper<ProductOrderOutputModel>();
+            if (request.Data.Count == 0)
             {
-                Data = mapperData,
-                ErrorMessage = data.ErrorMessage
-            };
+                result.ErrorMessage = ResponseMessage.orderNotFound;
+                return result;
+            }
+            var productStoreModel = _productRepository.GetProductStore(model.ProductId, request.Data[0].Store.Id.Value).Data;
+            if (productStoreModel.Quantity >= model.Quantity)
+            {
+                _productRepository.UpdateProductStore(new ProductStoreDTO
+                {
+                    Id = productStoreModel.Id,
+                    ProductId = productStoreModel.ProductId,
+                    StoreId = productStoreModel.StoreId,
+                    Quantity = productStoreModel.Quantity - model.Quantity,
+                    IsDeleted = model.IsDeleted
+                });
+               var productOrderDTO = _mapper.Map<ProductOrderDTO>(model);
+               
+                var data = _orderRepository.AddProductToOrder(productOrderDTO);
+                var mapperData = _mapper.Map<ProductOrderOutputModel>(data.Data);
+                result.Data = mapperData;
+                result.ErrorMessage = data.ErrorMessage;
+            }
+            else
+            {
+                result.ErrorMessage = ResponseMessage.productNotFound;
+            }
+            return result;
         }
 
         public DataWrapper<ProductOrderOutputModel> UpdateProductOrder(ProductOrderInputModel model)
