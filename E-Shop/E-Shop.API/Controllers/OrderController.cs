@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Shop.API.Services;
 using E_Shop.Business.Managers;
 using E_Shop.Business.Models.Input;
 using E_Shop.Business.Models.Output;
@@ -16,10 +17,12 @@ namespace E_Shop.API.Controllers
     {
         private IOrderManager _orderManager;
         private IProductManager _productManager;
-        public OrderController(IOrderManager orderManager, IProductManager productManager)
+        private LeadValidation _leadValidation;
+        public OrderController(IOrderManager orderManager, IProductManager productManager, LeadValidation leadValidation)
         {
             _orderManager = orderManager;
             _productManager = productManager;
+            _leadValidation = leadValidation;
         }
 
         /// <summary>
@@ -39,9 +42,16 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>      
         /// <returns> Order Output Model</returns>
+        /// <response code="200">Returns total lead balance by list of accounts in requested currency.</response>
+        /// <response code="520">If problem occured.</response>
         [HttpPost("add")]
         public ActionResult<OrderOutputModel> AddOrder([FromBody] OrderInputModel model)
         {
+            var validationResult = _leadValidation.ValidateIdValue(model.LeadId);
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return UnprocessableEntity(validationResult);
+            }
             var result = _orderManager.CreateOrder(model);
             if (result.IsOk)
             {
@@ -73,6 +83,11 @@ namespace E_Shop.API.Controllers
         [HttpPut("update")]
         public ActionResult<OrderOutputModel> UpdateOrder([FromBody] OrderInputModel model)
         {
+            var validationResult = _leadValidation.ValidateIdValue(model.LeadId);
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return UnprocessableEntity(validationResult);
+            }
             var result = _orderManager.UpdateOrder(model);
 
             if (result.IsOk)

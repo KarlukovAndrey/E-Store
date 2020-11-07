@@ -59,6 +59,7 @@ namespace E_Shop.Business.Managers
                 return result;
             }
             var productStoreModel = _productRepository.GetProductStore(model.ProductId, request.Data[0].Store.Id.Value).Data;
+            //var productStore
             if (productStoreModel.Quantity >= model.Quantity)
             {
                 _productRepository.UpdateProductStore(new ProductStoreDTO

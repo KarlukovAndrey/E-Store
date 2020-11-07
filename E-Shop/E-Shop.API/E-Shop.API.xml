@@ -25,6 +25,36 @@
             
              </remarks>
              <returns> LeadOutputModel</returns>
+             <response code="200">Returns LeadOutputModel by "id"</response>
+             <response code="422">If parameters weren't validated</response>
+             <response code="520">If problem occured</response>
+        </member>
+        <member name="M:E_Shop.API.Controllers.LeadController.UpdateLead(E_Shop.Business.Models.Input.LeadInputModel)">
+             <summary>
+             Update lead
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /
+                 {
+                    "Id": 1
+                    "FirstName": "Vasia",
+                    "LastName": "Ivanov",
+                    "Birthday": "31.12.1991",
+                    "Address": "Lenina 14",
+                    "Phone":"89214587400",
+                    "Email": "something@mail.ru",
+                    "Password":"qq!fs23",   
+                    "CityId":1
+                 }
+            
+             </remarks>
+             <returns> LeadOutputModel</returns>
+             <response code="200">Returns LeadOutputModel by "id"</response>
+             <response code="404">if lead is not found</response>
+             <response code="422">If parameters weren't validated</response>
+             <response code="520">If problem occured</response>
         </member>
         <member name="M:E_Shop.API.Controllers.LeadController.DeleteLead(System.Int64)">
             <summary>
@@ -32,6 +62,8 @@
             </summary>
             <param name="id"></param>
             <returns>LeadOutputModel</returns>
+            <response code="200">Returns LeadOutputModel by "id"</response>
+            <response code="422">If parameters weren't validated</response>
         </member>
         <member name="M:E_Shop.API.Controllers.LeadController.GetResultSearch(E_Shop.Business.Models.Input.SearchInputModel)">
             <summary>
@@ -57,6 +89,8 @@
             
              </remarks>      
              <returns> Order Output Model</returns>
+             <response code="200">Returns total lead balance by list of accounts in requested currency.</response>
+             <response code="520">If problem occured.</response>
         </member>
         <member name="M:E_Shop.API.Controllers.OrderController.UpdateOrder(E_Shop.Business.Models.Input.OrderInputModel)">
              <summary>

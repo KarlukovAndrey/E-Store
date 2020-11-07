@@ -59,7 +59,7 @@
 			DustContainerVolume,
 			AttachmentsCount,
 			RemoteLaunch,
-			СleaningАrea,
+			CleaningArea,
 			TurnTableDiameter,
 			NumberOfProwerLevel,
 			Grill,

@@ -97,7 +97,7 @@ namespace E_Shop.API.Services
             }
             return tmp;
         }
-        public string ValidateIdValue(long id)
+        public string ValidateIdValue(long? id)
         {
             if (id <= 0)
             {

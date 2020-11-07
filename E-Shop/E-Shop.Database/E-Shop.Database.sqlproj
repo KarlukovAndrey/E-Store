@@ -97,5 +97,7 @@
     <Build Include="StoredProcedures\Product_StoreCrud\GetProductStore.sql" />
     <Build Include="StoredProcedures\ProductCrud\UpdateProductById.sql" />
     <Build Include="StoredProcedures\ProductCrud\GetAllProduct.sql" />
+    <Build Include="StoredProcedures\Product_StoreCrud\ProductStoreSearch.sql" />
+    <Build Include="StoredProcedures\ProductCrud\Search_Product.sql" />
   </ItemGroup>
 </Project>

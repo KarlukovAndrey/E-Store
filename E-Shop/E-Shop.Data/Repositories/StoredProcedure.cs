@@ -21,6 +21,7 @@ namespace E_Shop.Data.Repositories
         public const string GetProductStore = "[GetProductStore]";
         public const string UpdateProductById = "[UpdateProductById]";
         public const string GetAllProduct = "[GetAllProduct]";
+        public const string SearchProduct = "[Search_Product]";
 
     }
 }

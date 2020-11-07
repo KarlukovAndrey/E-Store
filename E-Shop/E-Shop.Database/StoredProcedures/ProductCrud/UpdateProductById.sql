@@ -59,7 +59,7 @@ as
 	  DustContainerVolume = @DustContainerVolume,
 	  AttachmentsCount = @AttachmentsCount,
 	  RemoteLaunch = @RemoteLaunch,
-	  СleaningАrea = @СleaningАrea,
+	  CleaningArea = @СleaningАrea,
 	  TurnTableDiameter = @TurnTableDiameter,
 	  NumberOfProwerLevel = @NumberOfProwerLevel,
 	  Grill = @Grill,

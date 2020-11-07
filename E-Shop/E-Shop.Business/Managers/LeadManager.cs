@@ -68,6 +68,6 @@ namespace E_Shop.Business.Managers
             };
         }
 
-        public DataWrapper<List<LeadOutputModel>> FindLeads(long id) => FindLeads(new SearchInputModel { Id = id });
+        public DataWrapper<List<LeadOutputModel>> FindLeads(long? id) => FindLeads(new SearchInputModel { Id = id });
     }
 }

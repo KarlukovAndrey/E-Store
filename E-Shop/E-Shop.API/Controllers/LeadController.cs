@@ -24,7 +24,7 @@ namespace E_Shop.API.Controllers
             _leadManager = leadManager;
             _leadValidation = leadValidation;
         }
-              
+
         /// <summary>
         /// Create lead
         /// </summary>
@@ -45,6 +45,9 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>
         /// <returns> LeadOutputModel</returns>
+        /// <response code="200">Returns LeadOutputModel by "id"</response>
+        /// <response code="422">If parameters weren't validated</response>
+        /// <response code="520">If problem occured</response>
         //[AllowAnonymous]
         [HttpPost("add")]
         public ActionResult<LeadOutputModel> AddLead([FromBody] LeadInputModel model)
@@ -63,10 +66,35 @@ namespace E_Shop.API.Controllers
                 }
                 return Ok(result.Data);
             }
+
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
-
+        /// <summary>
+        /// Update lead
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /
+        ///     {
+        ///        "Id": 1
+        ///        "FirstName": "Vasia",
+        ///        "LastName": "Ivanov",
+        ///        "Birthday": "31.12.1991",
+        ///        "Address": "Lenina 14",
+        ///        "Phone":"89214587400",
+        ///        "Email": "something@mail.ru",
+        ///        "Password":"qq!fs23",   
+        ///        "CityId":1
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns> LeadOutputModel</returns>
+        /// <response code="200">Returns LeadOutputModel by "id"</response>
+        /// <response code="404">if lead is not found</response>
+        /// <response code="422">If parameters weren't validated</response>
+        /// <response code="520">If problem occured</response>
         [HttpPut("update")]
         public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
         {
@@ -76,25 +104,16 @@ namespace E_Shop.API.Controllers
                 return UnprocessableEntity(validationResult);
             }
             var result = _leadManager.UpdateLead(model);
-            if (result.IsOk)
-            {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
-            }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
-
+            return MakeResponse<LeadOutputModel, LeadOutputModel>(result);
         }
-
-       
 
         /// <summary>
         /// Delete lead
         /// </summary>
         /// <param name="id"></param>
         /// <returns>LeadOutputModel</returns>
+        /// <response code="200">Returns LeadOutputModel by "id"</response>
+        /// <response code="422">If parameters weren't validated</response>
         //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult DeleteLead(long id)

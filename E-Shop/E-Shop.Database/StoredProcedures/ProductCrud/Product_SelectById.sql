@@ -24,7 +24,7 @@ AS
 	P.[DustContainerVolume], 
 	P.[AttachmentsCount], 
 	P.[RemoteLaunch], 
-	P.[СleaningАrea], 
+	P.[CleaningArea], 
 	P.[TurnTableDiameter], 
 	P.[NumberOfProwerLevel], 
 	P.[Grill], 

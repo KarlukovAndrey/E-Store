@@ -22,7 +22,7 @@
 	[DustContainerVolume] float NULL,
 	[AttachmentsCount] int NULL,
 	[RemoteLaunch] bit NULL,
-	[СleaningАrea] int NULL,
+	[CleaningArea] int NULL,
 	[TurnTableDiameter] float NULL,
 	[NumberOfProwerLevel] int NULL,
 	[Grill] bit NULL,

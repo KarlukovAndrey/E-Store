@@ -119,6 +119,70 @@ namespace E_Shop.Data.Repositories
             return result;
         }
 
+        public DataWrapper<List<ProductDTO>> SearchProduct(SearchProductDTO dto)
+        {
+            var result = new DataWrapper<List<ProductDTO>>();
+            try
+            {
+                result.Data = DbConnection.Query<ProductDTO>(
+                    StoredProcedure.SearchProduct,
+                new
+                {
+                    dto.Id,
+                    dto.Name,
+                    dto.NameSearchMode,
+                    dto.PriceFrom,
+                    dto.PriceTo,
+                    dto.Brand,
+                    dto.BrandSearchMode,
+                    dto.ManufactureCountry,
+                    dto.ManufactureCountrySearchMode,
+                    dto.ManufactureDateFrom,
+                    dto.ManufactureDateTo,
+                    dto.ScreenSizeFrom,
+                    dto.ScreenSizeTo,
+                    dto.Resolution,
+                    dto.ResolutionSearchMode,
+                    dto.DysplayType,
+                    dto.DysplayTypeSearchMode,
+                    dto.ThreedimensionalTechnology,
+                    dto.WetCleaning,
+                    dto.DustContainerVolumeFrom,
+                    dto.DustContainerVolumeTo,
+                    dto.AttachmentsCountFrom,
+                    dto.AttachmentsCountTo,
+                    dto.RemoteLaunch,
+                    dto.CleaningAreaFrom,
+                    dto.CleaningAreaTo,
+                    dto.TurnTableDiameterFrom,
+                    dto.TurnTableDiameterTo,
+                    dto.Grill,
+                    dto.MicrowavesPowerFrom,
+                    dto.MicrowavesPowerTo,
+                    dto.SimCardCountFrom,
+                    dto.SimCardCountTo,
+                    dto.FrontCamera,
+                    dto.HeadphoneJack,
+                    dto.BatteryCapacityFrom,
+                    dto.BatteryCapacityTo,
+                    dto.ConnectionStandard,
+                    dto.ConnectionStandardSearchMode,
+                    dto.MinTemperatureFreezerFrom,
+                    dto.MinTemperatureFreezerTo,
+                    dto.ColdStorageTimeFrom,
+                    dto.ColdStorageTimeTo,
+                    dto.Freezer,
+                    dto.Defrost
+                },
+                commandType: CommandType.StoredProcedure
+                ).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
         public DataWrapper<List<ProductDTO>> GetAllProduct()
         {
             var result = new DataWrapper<List<ProductDTO>>();
