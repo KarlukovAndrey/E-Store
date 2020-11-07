@@ -29,7 +29,7 @@ namespace E_Shop.Business.Models.Input
 		public float? DustContainerVolumeTo { get; set; }
 		public int? AttachmentsCountFrom { get; set; }
 		public int? AttachmentsCountTo { get; set; }
-		public bool RemoteLaunch { get; set; }
+		public bool? RemoteLaunch { get; set; }
 		public int? CleaningAreaFrom { get; set; }
 		public int? CleaningAreaTo { get; set; }
 		public float? TurnTableDiameterFrom { get; set; }

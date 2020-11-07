@@ -121,5 +121,20 @@ namespace E_Shop.API.Controllers
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
+
+        [HttpPost("search")]
+        public ActionResult<List<ProductOutputModel>> GetResultSearch([FromBody] SearchProductInputModel model)
+        {
+            var result = _productManager.SearchProducts(model);
+            if (result.IsOk)
+            {
+                if (result.Data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result.Data);
+            }
+            return Problem(detail: result.ErrorMessage, statusCode: 520);
+        }
     }
 }

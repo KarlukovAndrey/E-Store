@@ -107,6 +107,7 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
+        public DataWrapper<List<OrderOutputModel>> FindOrders(long? id) => FindOrders(new SearchOrderInputModel { Id = id });
 
     }
 }

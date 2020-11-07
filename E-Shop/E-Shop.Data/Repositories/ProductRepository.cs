@@ -119,7 +119,7 @@ namespace E_Shop.Data.Repositories
             return result;
         }
 
-        public DataWrapper<List<ProductDTO>> SearchProduct(SearchProductDTO dto)
+        public DataWrapper<List<ProductDTO>> SearchProducts(SearchProductDTO dto)
         {
             var result = new DataWrapper<List<ProductDTO>>();
             try

@@ -66,6 +66,10 @@ namespace E_Shop.API.Configuration
 
             CreateMap<ProductDTO, ProductOutputModel>()
                 .ForPath(dest => dest.ManufactureDate, o => o.MapFrom(src => src.ManufactureDate.ToString(_shortDateFormat)));
+
+            CreateMap<SearchProductInputModel, SearchProductDTO>()
+                .ForPath(dest => dest.ManufactureDateFrom, o => o.MapFrom(src => src.ManufactureDateFrom != null ? (DateTime?)DateTime.ParseExact(src.ManufactureDateFrom, _shortDateFormat, CultureInfo.InvariantCulture) : null))
+                .ForPath(dest => dest.ManufactureDateTo, o => o.MapFrom(src => src.ManufactureDateTo != null ? (DateTime?)DateTime.ParseExact(src.ManufactureDateTo, _shortDateFormat, CultureInfo.InvariantCulture) : null));
         }
     }
 }

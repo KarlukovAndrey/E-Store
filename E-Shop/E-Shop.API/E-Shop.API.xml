@@ -89,7 +89,8 @@
             
              </remarks>      
              <returns> Order Output Model</returns>
-             <response code="200">Returns total lead balance by list of accounts in requested currency.</response>
+             <response code="200">Returns order output model.</response>
+             <response code="422">If parameters weren't validated.</response>
              <response code="520">If problem occured.</response>
         </member>
         <member name="M:E_Shop.API.Controllers.OrderController.UpdateOrder(E_Shop.Business.Models.Input.OrderInputModel)">
@@ -110,6 +111,9 @@
             
              </remarks>      
              <returns> Order Output Model</returns>
+             <response code="200">Returns order output model.</response>
+             <response code="422">If parameters weren't validated.</response>
+             <response code="520">If problem occured.</response>
         </member>
         <member name="M:E_Shop.API.Controllers.OrderController.GetResultSearch(E_Shop.Business.Models.Input.SearchOrderInputModel)">
             <summary>

@@ -57,17 +57,8 @@ namespace E_Shop.API.Controllers
             {
                 return UnprocessableEntity(validationResult);
             }
-            var result = _leadManager.CreateLead(model);
-            if (result.IsOk)
-            {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
-            }
-
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
+            var result = _leadManager.CreateLead(model);      
+            return MakeResponse<LeadOutputModel, LeadOutputModel>(result);
         }
 
         /// <summary>
@@ -131,7 +122,7 @@ namespace E_Shop.API.Controllers
         /// Universal lead search
         /// </summary>
         /// <returns>List LeadOutputModels</returns>
-        [HttpPost("search-leads")]
+        [HttpPost("search")]
         public ActionResult<List<LeadOutputModel>> GetResultSearch([FromBody] SearchInputModel model) 
         {
             var results = _leadManager.FindLeads(model);
