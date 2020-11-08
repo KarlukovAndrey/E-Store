@@ -12,6 +12,9 @@ namespace E_Shop.API.Configuration
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LeadValidation>().SingleInstance();
+            builder.RegisterType<OrderValidation>().SingleInstance();
+            builder.RegisterType<ProductOrderValidation>().SingleInstance();
+            builder.RegisterType<ProductValidation>().SingleInstance();
             builder.RegisterType<LeadRepository>().As<ILeadRepository>().SingleInstance();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().SingleInstance();
             builder.RegisterType<OrderManager>().As<IOrderManager>().SingleInstance();

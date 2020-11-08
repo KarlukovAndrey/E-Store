@@ -95,5 +95,17 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };          
         }
+
+        public DataWrapper<List<ProductOutputModel>> SearchProducts(SearchProductInputModel model)
+        {
+            var searchProductDTO = _mapper.Map<SearchProductDTO>(model);
+            var data = _productRepository.SearchProducts(searchProductDTO);
+            var mapperData = _mapper.Map<List<ProductOutputModel>>(data.Data);
+            return new DataWrapper<List<ProductOutputModel>>
+            {
+                Data = mapperData,
+                ErrorMessage = data.ErrorMessage
+            };
+        }
     }
 }

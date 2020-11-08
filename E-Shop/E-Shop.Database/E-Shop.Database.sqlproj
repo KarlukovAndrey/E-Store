@@ -63,6 +63,7 @@
     <Folder Include="StoredProcedures\Product_StoreCrud" />
     <Folder Include="StoredProcedures\OrderCrud" />
     <Folder Include="StoredProcedures\ProductCrud" />
+    <Folder Include="Migrations" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Store.sql" />
@@ -99,5 +100,8 @@
     <Build Include="StoredProcedures\ProductCrud\GetAllProduct.sql" />
     <Build Include="StoredProcedures\Product_StoreCrud\ProductStoreSearch.sql" />
     <Build Include="StoredProcedures\ProductCrud\Search_Product.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\V2.0.sql" />
   </ItemGroup>
 </Project>

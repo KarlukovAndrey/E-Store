@@ -15,5 +15,6 @@ namespace E_Shop.Business.Managers
         DataWrapper<ProductStoreOutputModel> GetProductStore(int productId, int storeId);
         DataWrapper<ProductOutputModel> UpdateProduct(ProductInputModel model);
         DataWrapper<List<ProductOutputModel>> GetAllProductByType(int type);
-    }
+        DataWrapper<List<ProductOutputModel>> SearchProducts(SearchProductInputModel model);
+    } 
 }

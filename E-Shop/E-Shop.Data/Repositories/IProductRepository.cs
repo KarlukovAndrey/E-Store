@@ -13,5 +13,6 @@ namespace E_Shop.Data.Repositories
         DataWrapper<List<ProductDTO>> GetAllProduct();
         DataWrapper<ProductDTO> UpdateProduct(ProductDTO dto);
         DataWrapper<ProductDTO> AddProduct(ProductDTO dto);
+        DataWrapper<List<ProductDTO>> SearchProducts(SearchProductDTO dto);
     }
 }

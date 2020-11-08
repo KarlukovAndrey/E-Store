@@ -6,6 +6,7 @@ using E_Shop.API.Services;
 using E_Shop.Business.Managers;
 using E_Shop.Business.Models.Input;
 using E_Shop.Business.Models.Output;
+using E_Shop.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,19 @@ namespace E_Shop.API.Controllers
         private IOrderManager _orderManager;
         private IProductManager _productManager;
         private LeadValidation _leadValidation;
-        public OrderController(IOrderManager orderManager, IProductManager productManager, LeadValidation leadValidation)
+        private OrderValidation _orderValidation;
+        private ProductOrderValidation _productOrderValidation;
+        private ProductValidation _productValidation;
+        public OrderController(IOrderManager orderManager, IProductManager productManager, LeadValidation leadValidation,
+                                OrderValidation orderValidation, ProductOrderValidation productOrderValidation,
+                                ProductValidation productValidation)
         {
             _orderManager = orderManager;
             _productManager = productManager;
             _leadValidation = leadValidation;
+            _orderValidation = orderValidation;
+            _productOrderValidation = productOrderValidation;
+            _productValidation = productValidation;
         }
 
         /// <summary>
@@ -42,12 +51,14 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>      
         /// <returns> Order Output Model</returns>
-        /// <response code="200">Returns total lead balance by list of accounts in requested currency.</response>
+        /// <response code="200">Returns order output model.</response>
+        /// <response code="422">If parameters weren't validated.</response>
         /// <response code="520">If problem occured.</response>
         [HttpPost("add")]
         public ActionResult<OrderOutputModel> AddOrder([FromBody] OrderInputModel model)
         {
             var validationResult = _leadValidation.ValidateIdValue(model.LeadId);
+            validationResult += _orderValidation.ValidateOrderInputModel(model);
             if (!string.IsNullOrEmpty(validationResult))
             {
                 return UnprocessableEntity(validationResult);
@@ -80,80 +91,71 @@ namespace E_Shop.API.Controllers
         ///
         /// </remarks>      
         /// <returns> Order Output Model</returns>
+        /// <response code="200">Returns order output model.</response>
+        /// <response code="422">If parameters weren't validated.</response>
+        /// <response code="520">If problem occured.</response>
         [HttpPut("update")]
         public ActionResult<OrderOutputModel> UpdateOrder([FromBody] OrderInputModel model)
         {
             var validationResult = _leadValidation.ValidateIdValue(model.LeadId);
+            validationResult += _orderValidation.ValidateOrderInputModel(model);
             if (!string.IsNullOrEmpty(validationResult))
             {
                 return UnprocessableEntity(validationResult);
             }
             var result = _orderManager.UpdateOrder(model);
-
-            if (result.IsOk)
-            {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
-            }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
-
+            return MakeResponse<OrderOutputModel, OrderOutputModel>(result);
         }
-
-        
-      
 
         [HttpPost("add-product-to-order")]
         public ActionResult<ProductOrderOutputModel> AddProductToOrder([FromBody] ProductOrderInputModel model)
         {
-            var result = _orderManager.AddProductToOrder(model);
-            if (result.IsOk)
+            var validationResult = _productOrderValidation.ValidateProductOrder(model);
+            validationResult += _productValidation.ValidateIdValue(model.ProductId);
+            if (!string.IsNullOrEmpty(validationResult))
             {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
+                return UnprocessableEntity(validationResult);
             }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
+            var result = _orderManager.AddProductToOrder(model);
+            return MakeResponse<ProductOrderOutputModel, ProductOrderOutputModel>(result);
         }
 
 
         [HttpPost("update-product_order")]
         public ActionResult<ProductOrderOutputModel> UpdateProductOrder([FromBody] ProductOrderInputModel model)
         {
-            var result = _orderManager.UpdateProductOrder(model);
-            if (result.IsOk)
+            var validationResult = _productOrderValidation.ValidateProductOrder(model);
+            validationResult += _productValidation.ValidateIdValue(model.ProductId);
+            if (!string.IsNullOrEmpty(validationResult))
             {
-                if (result.Data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result.Data);
+                return UnprocessableEntity(validationResult);
             }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
-
+            var result = _orderManager.UpdateProductOrder(model);
+            return MakeResponse<ProductOrderOutputModel,ProductOrderOutputModel>(result);
         }
 
         /// <summary>
         /// Universal order search
         /// </summary>
         /// <returns> List OrderOutputModels</returns>
-        [HttpPost("search-orders")]
+        [HttpPost("search")]
         public ActionResult<List<OrderOutputModel>> GetResultSearch([FromBody] SearchOrderInputModel model)
         {
             var result = _orderManager.FindOrders(model);
-            if (result.IsOk)
+            return MakeResponse<List<OrderOutputModel>, List<OrderOutputModel>>(result);
+        }
+
+        private ActionResult<K> MakeResponse<T, K>(DataWrapper<T> operationResult)
+        {
+            if (operationResult.IsOk)
             {
-                if (result.Data == null)
+                if (operationResult.Data == null)
                 {
                     return NotFound();
                 }
-                return Ok(result.Data);
+                return Ok(operationResult.Data);
             }
-            return Problem(detail: result.ErrorMessage, statusCode: 520);
+            return Problem(detail: operationResult.ErrorMessage, statusCode: 520);
         }
     }
 }
