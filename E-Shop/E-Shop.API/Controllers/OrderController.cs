@@ -57,6 +57,7 @@ namespace E_Shop.API.Controllers
         [HttpPost("add")]
         public ActionResult<OrderOutputModel> AddOrder([FromBody] OrderInputModel model)
         {
+           
             var validationResult = _leadValidation.ValidateIdValue(model.LeadId);
             validationResult += _orderValidation.ValidateOrderInputModel(model);
             if (!string.IsNullOrEmpty(validationResult))

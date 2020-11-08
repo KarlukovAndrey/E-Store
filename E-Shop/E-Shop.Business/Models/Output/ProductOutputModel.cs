@@ -28,13 +28,13 @@ namespace E_Shop.Business.Models.Output
         public float? DustContainerVolume { get; set; }
         public int? AttachmentsCount { get; set; }
         public bool? RemoteLaunch { get; set; }
-        public int? СleaningАrea { get; set; }
+        public int? CleaningArea { get; set; }    
         public float? TurnTableDiameter { get; set; }
         public int? NumberOfProwerLevel { get; set; }
         public bool? Grill { get; set; }
         public int? MicrowavesPower { get; set; }
         public int? SimCardCount { get; set; }
-        public bool? FrontСamera { get; set; }
+        public bool? FrontCamera { get; set; }
         public bool? HeadphoneJack { get; set; }
         public int? BatteryCapacity { get; set; }
         public string ConnectionStandard { get; set; }

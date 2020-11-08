@@ -533,3 +533,10 @@ while  @count <= @ProductCount
 		   end;
 		 set @count += 1	
 	end;
+go
+Alter Table dbo.Product
+drop column ScreenSize,Resolution,DysplayType,ThreedimensionalTechnology,WetCleaning,DustContainerVolume,
+AttachmentsCount,RemoteLaunch,CleaningArea,TurnTableDiameter,NumberOfProwerLevel,Grill,
+MicrowavesPower,SimCardCount, FrontCamera, HeadphoneJack, BatteryCapacity, ConnectionStandard,
+MinTemperatureFreezer,ColdStorageTime,Freezer,Defrost
+

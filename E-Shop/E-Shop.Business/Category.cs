@@ -74,7 +74,7 @@ namespace E_Shop.Business
                         foreach (var i in allProducts)
                         {
                             if (i.SimCardCount != null &&
-                                i.FrontСamera != null &&
+                                i.FrontCamera != null &&
                                 i.HeadphoneJack != null &&
                                 i.BatteryCapacity != null)
                             {

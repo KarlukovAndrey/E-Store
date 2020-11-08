@@ -69,7 +69,7 @@ namespace E_Shop.API.Controllers
         ///
         ///     POST /
         ///     {
-        ///        "Id": 1
+        ///        "Id": 1,
         ///        "FirstName": "Vasia",
         ///        "LastName": "Ivanov",
         ///        "Birthday": "31.12.1991",
@@ -77,7 +77,9 @@ namespace E_Shop.API.Controllers
         ///        "Phone":"89214587400",
         ///        "Email": "something@mail.ru",
         ///        "Password":"qq!fs23",   
+        ///        "RoleId": 1,
         ///        "CityId":1
+        ///        
         ///     }
         ///
         /// </remarks>
@@ -89,11 +91,13 @@ namespace E_Shop.API.Controllers
         [HttpPut("update")]
         public ActionResult<LeadOutputModel> UpdateLead([FromBody] LeadInputModel model)
         {
-            string validationResult = _leadValidation.ValidateLeadInputModelForUpdate(model);
+            string validationResult = _leadValidation.ValidateLeadInputModel(model);
+            validationResult = _leadValidation.ValidateIdValue(model.Id);
             if (!string.IsNullOrEmpty(validationResult))
             {
                 return UnprocessableEntity(validationResult);
             }
+           
             var result = _leadManager.UpdateLead(model);
             return MakeResponse<LeadOutputModel, LeadOutputModel>(result);
         }

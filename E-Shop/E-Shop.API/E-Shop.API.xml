@@ -38,7 +38,7 @@
             
                  POST /
                  {
-                    "Id": 1
+                    "Id": 1,
                     "FirstName": "Vasia",
                     "LastName": "Ivanov",
                     "Birthday": "31.12.1991",
@@ -46,7 +46,9 @@
                     "Phone":"89214587400",
                     "Email": "something@mail.ru",
                     "Password":"qq!fs23",   
+                    "RoleId": 1,
                     "CityId":1
+                    
                  }
             
              </remarks>
@@ -120,13 +122,6 @@
             Universal order search
             </summary>
             <returns> List OrderOutputModels</returns>
-        </member>
-        <member name="M:E_Shop.API.Controllers.ProductController.GetProduct(System.Int32)">
-            <summary>
-            Get Product by id
-            </summary>  
-            <param name="id"></param>
-            <returns> Product model</returns>
         </member>
     </members>
 </doc>

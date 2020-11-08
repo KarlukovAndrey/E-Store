@@ -103,5 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\V2.0.sql" />
+    <None Include="Migrations\AddingDataToTables.sql" />
   </ItemGroup>
 </Project>

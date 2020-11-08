@@ -49,17 +49,7 @@ namespace E_Shop.API.Controllers
                 return Ok(result.Data);
             }
             return Problem(detail: result.ErrorMessage, statusCode: 520);
-        }
-        /// <summary>
-        /// Get Product by id
-        /// </summary>  
-        /// <param name="id"></param>
-        /// <returns> Product model</returns>
-        [HttpGet("{id}")]
-        public ActionResult<ProductOutputModel> GetProduct(int id)
-        {
-            return null;
-        }
+        }   
 
         [HttpPost("add")]
         public ActionResult<int> AddProduct([FromBody] ProductInputModel model)
@@ -91,7 +81,7 @@ namespace E_Shop.API.Controllers
             return Problem(detail: result.ErrorMessage, statusCode: 520);
         }
 
-        [HttpGet("all-product/{category}")]
+        [HttpGet("all/{category}")]
         public ActionResult<List<ProductOutputModel>> GetAllProductByType(int category)
         {
             var result = _productManager.GetAllProductByType(category);
