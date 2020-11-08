@@ -44,32 +44,7 @@ Create table [dbo].Product_Category(
 )
 GO
 
-Create table [dbo].Tmp(
-	[Id] int PRIMARY KEY Identity(1,1) NOT NULL,
-	[ScreenSize] float NULL,
-	[Resolution] nvarchar(20) NULL,
-	[DysplayType] nvarchar(10) NULL,
-	[ThreedimensionalTechnology] bit NULL,
-	[WetCleaning] bit NULL,
-	[DustContainerVolume] float NULL,
-	[AttachmentsCount] int NULL,
-	[RemoteLaunch] bit NULL,
-	[CleaningArea] int NULL,
-	[TurnTableDiameter] float NULL,
-	[NumberOfProwerLevel] int NULL,
-	[Grill] bit NULL,
-	[MicrowavesPower] int NULL,
-	[SimCardCount] int NULL,
-	[FrontCamera] bit NULL,
-	[HeadphoneJack] bit NULL,
-	[BatteryCapacity] int NULL,
-	[ConnectionStandard] nvarchar(20) NULL,
-	[MinTemperatureFreezer] int NULL,
-	[ColdStorageTime] int NULL,
-	[Freezer] bit NULL,
-	[Defrost] bit NULL
-)
-GO
+
 insert into [dbo].[PropertyType] 
 values('ScreenSize'),
 ('Resolution'),
@@ -94,13 +69,13 @@ values('ScreenSize'),
 ('Freezer'),
 ('Defrost')
 Go
-insert into [dbo].[Category]
-values ('Television'),
-('Hoover'),
-('RoboHoover'),
-('Microwave'),
-('Telephone'),
-('Fridge')
+insert into [dbo].[Category] (Name, Description)
+values ('Television', ''),
+('Hoover', ''),
+('RoboHoover', ''),
+('Microwave', ''),
+('Telephone', ''),
+('Fridge', '')
 GO
 declare @ProductCount int
 set @ProductCount = (Select count(*) from [dbo].[Product]) 
@@ -129,6 +104,12 @@ declare @Freezer bit
 declare @Defrost bit
 
 declare @count int = 1
+declare @ProductPropertiesId int
+declare @SpecificationsValueFloat float
+declare @SpecificationsValueStringTw nvarchar(20)
+declare @SpecificationsValueStringTen nvarchar(10)
+declare @SpecificationsValueBit bit
+declare @SpecificationsValueInt int
 
 
 while  @count <= @ProductCount
@@ -138,13 +119,12 @@ while  @count <= @ProductCount
 		begin
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 1)
-			declare @SpecificationsValue float
-			set @SpecificationsValue = (select P.[ScreenSize] from [dbo].[Product] as P where (P.[Id] = @count))
 			
-			declare @ProductPropertiesId int
+			set @SpecificationsValueFloat = (select P.[ScreenSize] from [dbo].[Product] as P where (P.[Id] = @count))
+				
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 1))
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId,null,null,null, @SpecificationsValue)
+			Values(@ProductPropertiesId,null,null,null, @SpecificationsValueFloat)
 		end;
 
 		set @Resolution = (select P.[Resolution] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -153,14 +133,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 2)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 2))
-			
-			declare @SpecificationsValue nvarchar(20)
-			set @SpecificationsValue = (select P.[Resolution] from  [dbo].[Product] as P where (P.[Id] = @count))
+						
+			set @SpecificationsValueStringTw = (select P.[Resolution] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId,@SpecificationsValue, null, null, null)
+			Values(@ProductPropertiesId,@SpecificationsValueStringTw, null, null, null)
 		end;
 
 		set @DysplayType = (select P.[DysplayType] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -169,14 +147,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 3)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 3))
 			
-			declare @SpecificationsValue nvarchar(10)
-			set @SpecificationsValue = (select P.[DysplayType] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueStringTen = (select P.[DysplayType] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId,@SpecificationsValue, null, null, null)			
+			Values(@ProductPropertiesId,@SpecificationsValueStringTen, null, null, null)			
 		end;
 
 		set @ThreedimensionalTechnology = (select P.[ThreedimensionalTechnology] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -185,14 +161,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 4)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 4))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[ThreedimensionalTechnology] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[ThreedimensionalTechnology] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)			
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)			
 		end;
 
 		set @WetCleaning = (select P.[WetCleaning] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -201,14 +175,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 5)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 5))
 
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[WetCleaning] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[WetCleaning] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @DustContainerVolume = (select P.[DustContainerVolume] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -217,14 +189,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 6)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 6))
 		
-			declare @SpecificationsValue float
-			set @SpecificationsValue = (select P.[DustContainerVolume] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueFloat = (select P.[DustContainerVolume] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, null, @SpecificationsValue)	
+			Values(@ProductPropertiesId, null, null, null, @SpecificationsValueFloat)	
 		end;
 
 		set @AttachmentsCount = (select P.[AttachmentsCount] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -233,14 +203,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 7)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 7))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[AttachmentsCount] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[AttachmentsCount] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)	
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)	
 		end;
 
 		set @RemoteLaunch = (select P.[RemoteLaunch] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -249,14 +217,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 8)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 8))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[RemoteLaunch] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[RemoteLaunch] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @CleaningArea = (select P.[CleaningArea] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -265,14 +231,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 9)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 9))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[CleaningArea] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[CleaningArea] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)	
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)	
 		end;
 
 		set @TurnTableDiameter = (select P.[TurnTableDiameter] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -281,14 +245,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 10)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 10))
 			
-			declare @SpecificationsValue float
-			set @SpecificationsValue = (select P.[TurnTableDiameter] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueFloat = (select P.[TurnTableDiameter] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, null, @SpecificationsValue)	
+			Values(@ProductPropertiesId, null, null, null, @SpecificationsValueFloat)	
 		end;
 
 		set @NumberOfProwerLevel = (select P.[NumberOfProwerLevel] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -297,14 +259,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 11)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 11))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[NumberOfProwerLevel] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[NumberOfProwerLevel] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)	
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)	
 		end;
 
 		set @Grill = (select P.[Grill] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -313,14 +273,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 12)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 12))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[Grill] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[Grill] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @MicrowavesPower = (select P.[MicrowavesPower] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -329,14 +287,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 13)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 13))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[MicrowavesPower] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[MicrowavesPower] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)		
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)		
 		end;
 
 		set @SimCardCount = (select P.[SimCardCount] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -345,14 +301,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 14)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 14))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[SimCardCount] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[SimCardCount] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)		
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)		
 		end;
 		
 		set @FrontCamera = (select P.[FrontCamera] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -361,14 +315,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 15)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 15))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[FrontCamera] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[FrontCamera] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @HeadphoneJack = (select P.[HeadphoneJack] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -377,14 +329,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 16)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 16))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[HeadphoneJack] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[HeadphoneJack] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @BatteryCapacity = (select P.[BatteryCapacity] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -393,14 +343,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 17)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 17))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[BatteryCapacity] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[BatteryCapacity] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)		
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)		
 		end;
 
 		set @ConnectionStandard = (select P.[ConnectionStandard] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -409,14 +357,13 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 18)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 18))
 			
-			declare @SpecificationsValue nvarchar(20)
-			set @SpecificationsValue = (select P.[ConnectionStandard] from  [dbo].[Product] as P where (P.[Id] = @count))
+
+			set @SpecificationsValueStringTw = (select P.[ConnectionStandard] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId,@SpecificationsValue, null, null, null)
+			Values(@ProductPropertiesId,@SpecificationsValueStringTw, null, null, null)
 		end;
 
 		set @MinTemperatureFreezer = (select P.[MinTemperatureFreezer] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -425,14 +372,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 19)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 19))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[MinTemperatureFreezer] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[MinTemperatureFreezer] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)		
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)		
 		end;
 
 		set @ColdStorageTime = (select P.[ColdStorageTime] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -441,14 +386,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 20)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 20))
 			
-			declare @SpecificationsValue int
-			set @SpecificationsValue = (select P.[ColdStorageTime] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueInt = (select P.[ColdStorageTime] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, null, @SpecificationsValue, null)		
+			Values(@ProductPropertiesId, null, null, @SpecificationsValueInt, null)		
 		end;
 
 
@@ -458,14 +401,12 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 21)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 21))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[Freezer] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[Freezer] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 
 		set @Defrost = (select P.[Defrost] from [dbo].[Product] as P where(P.[Id] = @count))
@@ -474,15 +415,121 @@ while  @count <= @ProductCount
 			insert into [dbo].[Product_Properties] (ProductId, PropertyTypeId)
 			values(@count, 22)
 
-			declare @ProductPropertiesId int
 			set @ProductPropertiesId = (select PP.[Id] from [dbo].[Product_Properties] as PP where(PP.ProductId = @count and PP.PropertyTypeId = 22))
 			
-			declare @SpecificationsValue bit
-			set @SpecificationsValue = (select P.[Defrost] from  [dbo].[Product] as P where (P.[Id] = @count))
+			set @SpecificationsValueBit = (select P.[Defrost] from  [dbo].[Product] as P where (P.[Id] = @count))
 
 			insert into [dbo].[Product_PropertiesValue] (Product_PropertiesId, StringValue, BitValue, IntValue , FloatValue)
-			Values(@ProductPropertiesId, null, @SpecificationsValue, null, null)	
+			Values(@ProductPropertiesId, null, @SpecificationsValueBit, null, null)	
 		end;
 		set @count += 1				
 	end;
 Go
+
+declare @ScreenSize float
+declare @Resolution nvarchar(20)
+declare @DysplayType nvarchar(10)
+declare @ThreedimensionalTechnology bit
+declare @WetCleaning bit
+declare @DustContainerVolume float
+declare @AttachmentsCount int
+declare @RemoteLaunch bit
+declare @CleaningArea int
+declare @TurnTableDiameter float
+declare @NumberOfProwerLevel int
+declare @Grill bit
+declare @MicrowavesPower int
+declare @SimCardCount int
+declare @FrontCamera bit
+declare @HeadphoneJack bit
+declare @BatteryCapacity int
+declare @ConnectionStandard nvarchar(20)
+declare @MinTemperatureFreezer int
+declare @ColdStorageTime int
+declare @Freezer bit
+declare @Defrost bit
+
+declare @ProductCount int
+set @ProductCount = (Select count(*) from [dbo].[Product]) 
+declare @count int = 1
+
+while  @count <= @ProductCount
+	begin
+		set @ScreenSize = (select P.ScreenSize from [dbo].[Product] as P where(P.[Id] = @count))
+		set @Resolution = (select P.Resolution from [dbo].[Product] as P where(P.[Id] = @count))
+		set @DysplayType = (select P.DysplayType from [dbo].[Product] as P where(P.[Id] = @count))
+		set @ThreedimensionalTechnology = (select P.ThreedimensionalTechnology from [dbo].[Product] as P where(P.[Id] = @count))
+		set @WetCleaning = (select P.WetCleaning from [dbo].[Product] as P where(P.[Id] = @count))
+		set @DustContainerVolume = (select P.DustContainerVolume from [dbo].[Product] as P where(P.[Id] = @count))
+		set @AttachmentsCount = (select P.AttachmentsCount from [dbo].[Product] as P where(P.[Id] = @count))
+		set @RemoteLaunch = (select P.RemoteLaunch from [dbo].[Product] as P where(P.[Id] = @count))
+		set @CleaningArea = (select P.CleaningArea from [dbo].[Product] as P where(P.[Id] = @count))
+		set @TurnTableDiameter = (select P.TurnTableDiameter from [dbo].[Product] as P where(P.[Id] = @count))
+		set @NumberOfProwerLevel = (select P.NumberOfProwerLevel from [dbo].[Product] as P where(P.[Id] = @count))
+		set @Grill = (select P.Grill from [dbo].[Product] as P where(P.[Id] = @count))
+		set @MicrowavesPower = (select P.MicrowavesPower from [dbo].[Product] as P where(P.[Id] = @count))
+		set @SimCardCount = (select P.SimCardCount from [dbo].[Product] as P where(P.[Id] = @count))
+		set @FrontCamera = (select P.FrontCamera from [dbo].[Product] as P where(P.[Id] = @count))
+		set @HeadphoneJack = (select P.HeadphoneJack from [dbo].[Product] as P where(P.[Id] = @count))
+		set @BatteryCapacity = (select P.BatteryCapacity from [dbo].[Product] as P where(P.[Id] = @count))
+		set @ConnectionStandard = (select P.ConnectionStandard from [dbo].[Product] as P where(P.[Id] = @count))
+		set @MinTemperatureFreezer = (select P.MinTemperatureFreezer from [dbo].[Product] as P where(P.[Id] = @count))
+		set @ColdStorageTime = (select P.ColdStorageTime from [dbo].[Product] as P where(P.[Id] = @count))
+		set @Freezer = (select P.Freezer from [dbo].[Product] as P where(P.[Id] = @count))
+		set @Defrost = (select P.Defrost from [dbo].[Product] as P where(P.[Id] = @count))
+		
+		if (@ScreenSize is not null and
+			@Resolution is not null and
+			@DysplayType is not null and
+			@ThreedimensionalTechnology is not null)
+			begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 1)
+			end;
+
+		if(@WetCleaning is not null and
+		   @DustContainerVolume is not null and
+		   @AttachmentsCount is not null and
+		   @RemoteLaunch = 0)
+		   begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 2)
+		   end;
+
+		if(@WetCleaning is not null and
+		   @DustContainerVolume is not null and
+		   @AttachmentsCount is not null and
+		   @RemoteLaunch is not null)
+		   begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 3)
+		   end;
+
+		if(@TurnTableDiameter is not null and
+		   @NumberOfProwerLevel is not null and
+		   @Grill is not null and
+		   @MicrowavesPower is not null)
+		   begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 4)
+		   end;
+
+		if(@SimCardCount is not null and
+		   @FrontCamera is not null and
+		   @HeadphoneJack is not null and
+		   @BatteryCapacity is not null)
+		   begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 5)
+		   end;
+
+		if(@MinTemperatureFreezer is not null and
+		   @ColdStorageTime is not null and
+		   @Freezer is not null and
+		   @Defrost is not null)
+		   begin
+				insert into [dbo].[Product_Category] (ProductId, CategoryId)
+				values(@count, 6)
+		   end;
+		 set @count += 1	
+	end;
