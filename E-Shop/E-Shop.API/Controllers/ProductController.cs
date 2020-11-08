@@ -22,7 +22,6 @@ namespace E_Shop.API.Controllers
             _productManager = productManager;
         }
 
-
         [HttpPost("add-product-to-store")]
         public ActionResult<ProductStoreOutputModel> AddProductToStore([FromBody] ProductStoreInputModel model)
         {
