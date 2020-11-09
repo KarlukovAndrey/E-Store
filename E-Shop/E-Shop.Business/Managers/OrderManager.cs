@@ -48,7 +48,6 @@ namespace E_Shop.Business.Managers
                 ErrorMessage = data.ErrorMessage
             };
         }
-        // ДОДЕЛАТЬ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public DataWrapper<ProductOrderOutputModel> AddProductToOrder(ProductOrderInputModel model)
         {
             var request = _orderRepository.SearchOrder(new SearchOrderDTO() { Id = model.OrderId });
@@ -59,7 +58,6 @@ namespace E_Shop.Business.Managers
                 return result;
             }
             var productStoreModel = _productRepository.GetProductStore(model.ProductId, request.Data[0].Store.Id.Value).Data;
-            //var productStore
             if (productStoreModel.Quantity >= model.Quantity)
             {
                 _productRepository.UpdateProductStore(new ProductStoreDTO
